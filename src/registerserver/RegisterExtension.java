@@ -16,6 +16,8 @@ public class RegisterExtension extends SFSExtension{
 	    addRequestHandler("passwordmissing", PasswordMissingHandler.class);
 	    
 	    addRequestHandler("updatepassword", UpdatePasswordHandler.class);
+	    
+	    addRequestHandler("updatecaptcha", UpdateCaptchaHandler.class);
 		
 		//initSignUpAssistant();
 		//initLoginAssistant();
