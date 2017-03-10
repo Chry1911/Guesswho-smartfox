@@ -32,6 +32,10 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 		int trofei = params.getInt("trofei");
 		String nation = params.getUtfString("nation");
 		
+		
+		RandomString captcha = new RandomString();
+	    String code = captcha.toString();
+		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		
 		
@@ -81,9 +85,9 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 					    
 					    trace("stampiamo la data " + formattedDate);
 
-						String sql = "INSERT into Users(first_name, last_name, date_of_birth, username, password, email, trofei, position) values (?, ?, ?, ?, ?, ?, ?, ?)";
+						String sql = "INSERT into Users(first_name, last_name, date_of_birth, username, password, email, trofei, position, captcha) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				          obj = dbmanager.executeInsert(sql,
-				                     new Object[] {first_name,last_name, date, name, password, email, trofei, nation});
+				                     new Object[] {first_name,last_name, date, name, password, email, trofei, nation, code});
 				          
 				          ISFSObject success = new SFSObject();
 				      	success.putUtfString("success" ,"User successfully registrated");
