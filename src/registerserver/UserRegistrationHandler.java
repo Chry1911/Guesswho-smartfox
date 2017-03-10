@@ -1,6 +1,10 @@
 package registerserver;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.smartfoxserver.v2.db.IDBManager;
 import com.smartfoxserver.v2.entities.User;
@@ -13,10 +17,15 @@ import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 public class UserRegistrationHandler extends BaseClientRequestHandler {
 	
 	Object obj = null;
+	Date date;
 	public void handleClientRequest(User user, ISFSObject params){
 
 		trace("Sto chiedendo di registrare uno user al server");
 		
+		
+		String first_name = params.getUtfString("first_name");
+		String last_name = params.getUtfString("last_name");
+		String birth_day = params.getUtfString("date");
 		String name = params.getUtfString("name");
         String password = params.getUtfString("password");
 		String email = params.getUtfString("email");
@@ -49,13 +58,32 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				}else {
 					trace("registriamo l'utente nel nostro database");
 					
-					String sql = "INSERT into Users(username, password, email, trofei, position) values (?, ?, ?, ?, ?)";
-
+				
 					try{
 						trace("sono entrato nel secondo try");
-					
+						
+					    DateFormat readFormat = new SimpleDateFormat( "DD/mm/yyyy");
+
+					    DateFormat writeFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+					    
+					  
+					       date = readFormat.parse( birth_day );
+					   
+
+					    String formattedDate = "";
+					    if( date != null ) {
+					    formattedDate = writeFormat.format( date );
+					    }
+					    
+					    if(trofei >= 0){
+					    	trofei = 0;
+					    }
+					    
+					    trace("stampiamo la data " + formattedDate);
+
+						String sql = "INSERT into Users(first_name, last_name, date_of_birth, username, password, email, trofei, position) values (?, ?, ?, ?, ?, ?, ?, ?)";
 				          obj = dbmanager.executeInsert(sql,
-				                     new Object[] {name, password, email, trofei, nation});
+				                     new Object[] {first_name,last_name, date, name, password, email, trofei, nation});
 				          
 				          ISFSObject success = new SFSObject();
 				      	success.putUtfString("success" ,"User successfully registrated");
@@ -70,7 +98,10 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 			
 
 			
-	}
+	} catch (ParseException e) {
+			trace("vediamo l'errore dato " + date);
+			e.printStackTrace();
+		}
 					
 				}
 			} catch (SQLException e1) {
