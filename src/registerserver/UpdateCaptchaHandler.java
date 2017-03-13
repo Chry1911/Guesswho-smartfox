@@ -14,7 +14,7 @@ public class UpdateCaptchaHandler  extends BaseClientRequestHandler {
 
 	Object obj = null;
 	
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	public void handleClientRequest(User user, ISFSObject params) {
 		// TODO Auto-generated method stub
@@ -28,53 +28,41 @@ public class UpdateCaptchaHandler  extends BaseClientRequestHandler {
 		try {
 			trace("sono entrato nel primo try");
 			//obj = dbmanager.executeQuery(sql2, new Object[] {1});
-			ISFSArray ar = dbmanager.executeQuery("SELECT id_user FROM Users WHERE  email=? ", new Object[] {email}); 
+			ISFSArray ar = dbmanager.executeQuery("SELECT captcha FROM Users WHERE  email=? ", new Object[] {email}); 
 			
 			ISFSObject ob = ar.getSFSObject(0);
 			
-			
-		//	SFSArray ar = (SFSArray) obj;
-			
-		
 			
 			if(ar.size() > 1){
 				
 				trace("Errore secco");
 				ISFSObject error = new SFSObject();
-				error.putUtfString("error", "impossibile reperire lo user richiesto");
+				error.putUtfString("nosuccess", "impossibile reperire lo user richiesto");
 				send("updatecaptcha" , error, user);
 				//return;
 			}else {
 				trace("cambiamo il codice captcha dello user");
 		
-				int id_user=ob.getInt("id_user");
-					trace("stampiamo l'id user " + id_user);
+				String code=ob.getUtfString("captcha");
+					trace("stampiamo il codice " + code);
+					
+					
+					trace("stampiamo il captcha da client " + captcha);
 				
+		if(captcha.equals(code)){
+			trace("Codice identico");
+			ISFSObject success = new SFSObject();
+			success.putUtfString("success", "codice di verifica identico");
+			send("updatecaptcha" , success, user);
+		}else if(captcha != code){
+			trace("Codice sbagliato");
+			ISFSObject nosuccess = new SFSObject();
+			nosuccess.putUtfString("nosuccess", "codice di verifica diverso");
+			send("updatecaptcha" , nosuccess, user);
+		}
 		
 		
-		
-		try{
-			trace("sono entrato nel secondo try");
-		
-	          //obj = dbmanager.executeUpdate("update guesswho.users set captcha = ? where email = ? and id_user = ?",new Object[] {captcha, email, id_user});
-			String sql = "update guesswho.users set captcha = '" + captcha + "' where email = '" + email + "' and id_user = " + id_user;
-		
-	         dbmanager.executeUpdate(sql);
-	          ISFSObject success = new SFSObject();
-	      	success.putUtfString("success" ,"Codice captcha cambiato si può cambiare la password");
-	      	send("updatecaptcha", success, user);
-		} 
-		
-catch(SQLException e) {
-	
-	ISFSObject error = new SFSObject();
-	error.putUtfString("error", "MySQL update error");
-	send("updatecaptcha" , error, user);
-
-
-
-}
-			}	
+		}
 			} catch (SQLException e1) {
 				ISFSObject error = new SFSObject();
 				error.putUtfString("error", "MySQL error");
