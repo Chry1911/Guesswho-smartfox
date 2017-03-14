@@ -39,7 +39,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			connection = dbManager.getConnection();
 
 			// Build a prepared statement
-	        PreparedStatement stmt = connection.prepareStatement("SELECT username, password, clan_name FROM Users "
+	        PreparedStatement stmt = connection.prepareStatement("SELECT id_user,username,password,trofei,gems,gold,guesswho.users.position, clan_name FROM Users "
 	        		+ "inner join guesswho.clan on guesswho.users.id_user = guesswho.clan.utente_fondatore    "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_2 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_3 "
