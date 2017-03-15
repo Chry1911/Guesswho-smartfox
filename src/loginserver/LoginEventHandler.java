@@ -39,8 +39,9 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			connection = dbManager.getConnection();
 
 			// Build a prepared statement
-	        PreparedStatement stmt = connection.prepareStatement("SELECT id_user,username,password,trofei,gems,gold,guesswho.users.position, clan_name FROM Users "
-	        		+ "inner join guesswho.clan on guesswho.users.id_user = guesswho.clan.utente_fondatore    "
+	        PreparedStatement stmt = connection.prepareStatement("SELECT username, password, trofei, gold, gems ,guesswho.users.position, clan_name "
+	        		+ "FROM Users "
+	        		+ "left outer join guesswho.clan on guesswho.users.id_user = guesswho.clan.utente_fondatore "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_2 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_3 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_4 "
@@ -70,7 +71,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
  				// This is the part that goes to the client
  				SFSErrorData errData = new SFSErrorData(SFSErrorCode.LOGIN_BAD_USERNAME);
  				errData.addParameter(userName);
-
+                trace("mi sono intoppato qui???");
  				// Sends response if user gave incorrect user name
  				throw new SFSLoginException("Bad user name: " + userName, errData);
  				
@@ -81,6 +82,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			// Verify the secure password
 			if (!getApi().checkSecurePassword(session, dbPword, cryptedPass))
 			{
+				trace("mi sono intoppato dopo???");
 				SFSErrorData data = new SFSErrorData(SFSErrorCode.LOGIN_BAD_PASSWORD);
 				data.addParameter(userName);
 				// Sends response if user gave incorrect password
@@ -94,6 +96,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
         {
         	SFSErrorData errData = new SFSErrorData(SFSErrorCode.GENERIC_ERROR);
         	errData.addParameter("SQL Error: " + e.getMessage());
+        	trace("Dio merda mi sono intoppato qui???");
         	// Sends response about mysql errors
         	throw new SFSLoginException("A SQL Error occurred: " + e.getMessage(), errData);
         }
