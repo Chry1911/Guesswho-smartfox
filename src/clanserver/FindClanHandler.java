@@ -35,9 +35,11 @@ public class FindClanHandler extends BaseClientRequestHandler {
 			//obj = dbmanager.executeQuery("SELECT * FROM guesswho.Clan Limit 100 ", new Object[] {}); 
 			ISFSArray arr = dbmanager.executeQuery("SELECT * FROM guesswho.Clan where clan_name "
 					+ "Like ? and position Like ? and maxUsers <= ? and minUsers >= ? and min_trofei <= ? "
-					+ "and (tipo = 'Public' or tipo = 'Invito') "
+					+ "and ? >= min_trofei and (tipo = 'Public' or tipo = 'Invito') "
 					+ "order by trofei_total desc, clan_name", 
-					new Object[] {name, location, maxUsers, minUsers, usertrophy});
+					new Object[] {"%"+ name + "%", "%"+ location + "%", maxUsers, minUsers, usertrophy});
+			
+			
 			if (arr.size() > 0)
 			{
 			  SFSObject result = new SFSObject();
