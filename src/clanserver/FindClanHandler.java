@@ -21,7 +21,7 @@ public class FindClanHandler extends BaseClientRequestHandler {
 		String location = params.getUtfString("location");
 		int maxUsers = params.getInt("maxUsers");
 		int minUsers = params.getInt("minUsers");
-		//int minTrophy = params.getInt("minTrophy");
+		int minTrophy = params.getInt("minTrophy");
 		int usertrophy = params.getInt("user_trophy");
 		//boolean entry = params.getBool("can_entry");
 		
@@ -37,7 +37,7 @@ public class FindClanHandler extends BaseClientRequestHandler {
 					+ "Like ? and position Like ? and maxUsers <= ? and minUsers >= ? and min_trofei <= ? "
 					+ "and " + usertrophy + " >= min_trofei and (tipo = 'Public' or tipo = 'Invito') "
 					+ "order by trofei_total desc, clan_name", 
-					new Object[] {"%"+ name + "%", "%"+ location + "%", maxUsers, minUsers, usertrophy});
+					new Object[] {"%"+ name + "%", "%"+ location + "%", maxUsers, minUsers, minTrophy});
 			
 			
 			if (arr.size() > 0)
@@ -45,6 +45,11 @@ public class FindClanHandler extends BaseClientRequestHandler {
 			  SFSObject result = new SFSObject();
 			  result.putSFSArray("success", arr);
 			  send("findclan", result, user);
+			}
+			else {
+				SFSObject result2 = new SFSObject();
+				  result2.putSFSArray("nosuccess", arr);
+				  send("findclan", result2, user);
 			}
 			
 		}catch (SQLException ex) {
