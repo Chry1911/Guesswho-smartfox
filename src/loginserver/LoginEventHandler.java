@@ -9,6 +9,7 @@ import com.smartfoxserver.bitswarm.sessions.ISession;
 import com.smartfoxserver.v2.core.ISFSEvent;
 import com.smartfoxserver.v2.core.SFSEventParam;
 import com.smartfoxserver.v2.db.IDBManager;
+import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.exceptions.SFSErrorCode;
 import com.smartfoxserver.v2.exceptions.SFSErrorData;
 import com.smartfoxserver.v2.exceptions.SFSException;
@@ -30,9 +31,15 @@ public class LoginEventHandler extends BaseServerEventHandler {
 		trace("Password----------" + cryptedPass);
 		trace("Session----------" + session);
 		
+		 ISFSObject outData = (ISFSObject) event.getParameter(SFSEventParam.LOGIN_OUT_DATA);
+		   
+		   // Add data to the object
+		   
+		
 		// Get password from DB
 		IDBManager dbManager = getParentExtension().getParentZone().getDBManager();
 		Connection connection = null;
+	
 
 		// Grab a connection from the DBManager connection pool
         try {
@@ -62,9 +69,32 @@ public class LoginEventHandler extends BaseServerEventHandler {
 					+ "or guesswho.users.id_user = guesswho.clan.utente_19 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_20 "
 	        		+ "where username='"+userName+"'");
+	        
+	    
+               
 
 		    // Execute query
 		    ResultSet res = stmt.executeQuery();
+		    
+		    while(res.next())
+			{
+
+				String user = res.getString("username");
+				int trofei = res.getInt("trofei");
+				int gold = res.getInt("gold");
+				int gems = res.getInt("gems");
+				String position = res.getString("position");
+				String clan_name = res.getString("clan_name");
+				
+				outData.putUtfString("nome_utente", user);
+				outData.putInt("trofei", trofei);
+				outData.putInt("gold", gold);
+				outData.putInt("gems", gems);
+				outData.putUtfString("position", position);
+				outData.putUtfString("clan_name", clan_name);
+			}
+		    
+		    //outData.putInt("number", 100);
 		   // Verify that one record was found
  			if (!res.first())
  			{
@@ -76,6 +106,8 @@ public class LoginEventHandler extends BaseServerEventHandler {
  				throw new SFSLoginException("Bad user name: " + userName, errData);
  				
  			}
+ 			
+ 			
 
  			String dbPword = res.getString("password");
 
