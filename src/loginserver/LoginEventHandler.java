@@ -80,11 +80,27 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			{
 
 				String user = res.getString("username");
+				trace(user);
 				int trofei = res.getInt("trofei");
+				trace(trofei);
+				
 				int gold = res.getInt("gold");
+				trace(gold);
 				int gems = res.getInt("gems");
+				trace(gems);
 				String position = res.getString("position");
+				
+				if (position == null){
+					position = "";
+				}
+				trace(position);
+				
 				String clan_name = res.getString("clan_name");
+				
+				if (clan_name == null){
+					clan_name = "noclan";
+				}
+				trace(clan_name);
 				
 				outData.putUtfString("nome_utente", user);
 				outData.putInt("trofei", trofei);
@@ -92,6 +108,8 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				outData.putInt("gems", gems);
 				outData.putUtfString("position", position);
 				outData.putUtfString("clan_name", clan_name);
+				
+				
 			}
 		    
 		    //outData.putInt("number", 100);
