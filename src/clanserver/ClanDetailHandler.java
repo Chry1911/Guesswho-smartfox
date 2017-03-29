@@ -14,7 +14,8 @@ public class ClanDetailHandler extends BaseClientRequestHandler{
 
 	Object obj = null;
 	public void handleClientRequest(User user, ISFSObject params) {
-		int id_clan = params.getInt("clan_id");
+		//int id_clan = params.getInt("clan_id");
+		String clan_name = params.getUtfString("clan_name");
 		trace("Sto richiedendo al server i dettagli di un clan");
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
@@ -46,7 +47,7 @@ public class ClanDetailHandler extends BaseClientRequestHandler{
 					+ "where id_clan = ? order by users.trofei desc "
 					,
 					
-					new Object[] {id_clan});
+					new Object[] {clan_name});
 			if (arr.size() > 0)
 			{
 			  SFSObject result = new SFSObject();
