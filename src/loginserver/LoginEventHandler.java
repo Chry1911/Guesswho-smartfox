@@ -46,7 +46,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			connection = dbManager.getConnection();
 
 			// Build a prepared statement
-	        PreparedStatement stmt = connection.prepareStatement("SELECT username, password, trofei, gold, gems ,guesswho.users.position, clan_name "
+	        PreparedStatement stmt = connection.prepareStatement("SELECT username, password, trofei, gold, gems ,guesswho.users.position, clan_name, guesswho.clan.position as postoclan, trofei_total "
 	        		+ "FROM Users "
 	        		+ "left outer join guesswho.clan on guesswho.users.id_user = guesswho.clan.utente_fondatore "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_2 "
@@ -102,12 +102,24 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				}
 				trace(clan_name);
 				
+				String clan_position = res.getString("postoclan");
+				
+				if(clan_position == null){
+					clan_position = "";
+				}
+				trace(clan_position);
+				
+				int trofei_clan = res.getInt("trofei_total");
+				trace(trofei_clan);
+				
 				outData.putUtfString("nome_utente", user);
 				outData.putInt("trofei", trofei);
 				outData.putInt("gold", gold);
 				outData.putInt("gems", gems);
 				outData.putUtfString("position", position);
 				outData.putUtfString("clan_name", clan_name);
+				outData.putUtfString("clan_position", clan_position);
+				outData.putInt("trofei_clan", trofei_clan);
 				
 				
 			}
