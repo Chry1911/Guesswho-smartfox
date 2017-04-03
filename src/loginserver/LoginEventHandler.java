@@ -98,7 +98,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				String clan_name = res.getString("clan_name");
 				
 				if (clan_name == null){
-					clan_name = "noclan";
+					clan_name = "";
 				}
 				trace(clan_name);
 				
