@@ -44,7 +44,7 @@ public class ClanDetailHandler extends BaseClientRequestHandler{
 					+ "or guesswho.users.id_user = guesswho.clan.utente_18 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_19 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_20 "
-					+ "where id_clan = ? order by users.trofei desc "
+					+ "where username = ? order by users.trofei desc "
 					,
 					
 					new Object[] {clan_name});
