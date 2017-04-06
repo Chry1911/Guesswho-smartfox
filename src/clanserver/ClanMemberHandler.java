@@ -45,7 +45,7 @@ public class ClanMemberHandler extends BaseClientRequestHandler {
 							+ "or guesswho.users.id_user = guesswho.clan.utente_18 "
 							+ "or guesswho.users.id_user = guesswho.clan.utente_19 "
 							+ "or guesswho.users.id_user = guesswho.clan.utente_20 "			
-							+ "where id_clan = ?", 
+							+ "where clan_name = ? ", 
 							new Object[] {clan_name});
 			
 			if (arr.size() > 0)

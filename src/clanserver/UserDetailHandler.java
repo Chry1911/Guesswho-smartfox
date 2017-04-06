@@ -15,16 +15,16 @@ public class UserDetailHandler extends BaseClientRequestHandler{
 	Object obj = null;
 	public void handleClientRequest(User user, ISFSObject params) {
 		//int id_user = params.getInt("user_id");
-		String username = params.getUtfString("user_name");
+		String username = params.getUtfString("username");
 		trace("Sto richiedendo al server i dettagli di uno user");
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		
 		try{
 			trace("Ho fatto l'accesso per richiedere al server la mia query");
-			//obj = dbmanager.executeQuery("SELECT * FROM guesswho.Clan Limit 100 ", new Object[] {}); 
-			ISFSArray arr = dbmanager.executeQuery("SELECT guesswho.users.* From guesswho.users where username = ?",
-					new Object[] {username});
+			ISFSArray arr = dbmanager.executeQuery("select * from guesswho.users "
+					+ "where username = ? "
+					, new Object[] {username});
 			if (arr.size() > 0)
 			{
 			  SFSObject result = new SFSObject();
@@ -32,11 +32,12 @@ public class UserDetailHandler extends BaseClientRequestHandler{
 			  send("userdetail", result, user);
 			}
 			
-			
 		}catch (SQLException ex) {
 			ISFSObject error = new SFSObject();
+			trace("vediamo cosa contiene l'array" + error.toString());
 			error.putUtfString("error", "MySQL error");
 			send("userdetail" , error, user);
+			ex.printStackTrace();
 	}
 		}
 }
