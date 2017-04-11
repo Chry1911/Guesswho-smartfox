@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.smartfoxserver.bitswarm.sessions.ISession;
 import com.smartfoxserver.v2.api.CreateRoomSettings;
@@ -11,7 +12,7 @@ import com.smartfoxserver.v2.api.CreateRoomSettings.RoomExtensionSettings;
 import com.smartfoxserver.v2.core.ISFSEvent;
 import com.smartfoxserver.v2.core.SFSEventParam;
 import com.smartfoxserver.v2.db.IDBManager;
-
+import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.SFSRoomRemoveMode;
 import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
@@ -22,6 +23,8 @@ import com.smartfoxserver.v2.exceptions.SFSErrorData;
 import com.smartfoxserver.v2.exceptions.SFSException;
 import com.smartfoxserver.v2.exceptions.SFSLoginException;
 import com.smartfoxserver.v2.extensions.BaseServerEventHandler;
+
+
 
 
 public class LoginEventHandler extends BaseServerEventHandler {
@@ -131,9 +134,9 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				
 				if(clan_name != null || clan_name != ""){
 					
-				/*	Room roomname = getParentExtension().getParentZone().getRoomByName(clan_name);
-					
-					if(roomname.isActive() == false){
+				List<Room> roomname = getParentExtension().getParentZone().getRoomList();
+				trace("la lista delle stanze attive " + roomname.toString());
+					if(!roomname.contains(clan_name)){
 					//if(roomname.getName() != clan_name){
 						createRoom(user,clan_name);
 						trace("creata room clan " + clan_name);
@@ -141,8 +144,8 @@ public class LoginEventHandler extends BaseServerEventHandler {
 						
 						trace("room già esistente");
 					}
-				}*/
-					createRoom(user,clan_name);
+				}
+					//createRoom(user,clan_name);
 			}
 		    
 		    //outData.putInt("number", 100);
@@ -172,7 +175,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				throw new SFSLoginException("Login failed for user: "  + userName, data);
 			}
 
-        }}
+        }
 
         // User name was not found
         catch (SQLException e)
