@@ -6,10 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.smartfoxserver.bitswarm.sessions.ISession;
+import com.smartfoxserver.v2.api.CreateRoomSettings;
+import com.smartfoxserver.v2.api.CreateRoomSettings.RoomExtensionSettings;
 import com.smartfoxserver.v2.core.ISFSEvent;
 import com.smartfoxserver.v2.core.SFSEventParam;
 import com.smartfoxserver.v2.db.IDBManager;
+import com.smartfoxserver.v2.entities.SFSRoomRemoveMode;
+import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
+import com.smartfoxserver.v2.entities.data.SFSObject;
+import com.smartfoxserver.v2.exceptions.SFSCreateRoomException;
 import com.smartfoxserver.v2.exceptions.SFSErrorCode;
 import com.smartfoxserver.v2.exceptions.SFSErrorData;
 import com.smartfoxserver.v2.exceptions.SFSException;
@@ -32,7 +38,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 		trace("Session----------" + session);
 		
 		 ISFSObject outData = (ISFSObject) event.getParameter(SFSEventParam.LOGIN_OUT_DATA);
-		   
+		   User user = null;
 		   // Add data to the object
 		   
 		
@@ -79,8 +85,8 @@ public class LoginEventHandler extends BaseServerEventHandler {
 		    while(res.next())
 			{
 
-				String user = res.getString("username");
-				trace(user);
+				String username = res.getString("username");
+				trace(username);
 				int trofei = res.getInt("trofei");
 				trace(trofei);
 				
@@ -112,7 +118,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				int trofei_clan = res.getInt("trofei_total");
 				trace(trofei_clan);
 				
-				outData.putUtfString("nome_utente", user);
+				outData.putUtfString("nome_utente", username);
 				outData.putInt("trofei", trofei);
 				outData.putInt("gold", gold);
 				outData.putInt("gems", gems);
@@ -122,6 +128,9 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				outData.putInt("trofei_clan", trofei_clan);
 				
 				
+				if(clan_name != null || clan_name != ""){
+				createRoom(user,clan_name);
+				}
 			}
 		    
 		    //outData.putInt("number", 100);
@@ -158,7 +167,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
         {
         	SFSErrorData errData = new SFSErrorData(SFSErrorCode.GENERIC_ERROR);
         	errData.addParameter("SQL Error: " + e.getMessage());
-        	trace("Dio merda mi sono intoppato qui???");
+        	trace(" mi sono intoppato quiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii???");
         	// Sends response about mysql errors
         	throw new SFSLoginException("A SQL Error occurred: " + e.getMessage(), errData);
         }
@@ -171,5 +180,40 @@ public class LoginEventHandler extends BaseServerEventHandler {
         }
 
     }
+	
+	private void createRoom(User sender, String clanname){
+		 String clan_name = clanname;
+			//Room myfirstroom = getParentExtension().getParentZone().getRoomByName(clan_name);
+			RoomExtensionSettings res = new RoomExtensionSettings("Server","clanserver.ClanExtension");
+			      CreateRoomSettings crs = new CreateRoomSettings();
+			     
+			    
+			      crs.setName(clan_name);
+			      crs.setGroupId("clan_name " + clan_name);
+			      crs.setMaxVariablesAllowed(20);
+			      crs.setMaxUsers(20);
+			      crs.setAutoRemoveMode(SFSRoomRemoveMode.NEVER_REMOVE);
+			      crs.setDynamic(true);
+			      
+			      crs.setExtension(res);
+			      
+			     
+				      
+				      ISFSObject reback = SFSObject.newInstance();
+				      try {
+				         //getApi().createRoom(sender.getZone(),crs,sender);
+				         //getApi().createRoom(sender.getZone(),crs,null);
+				    	  getApi().createRoom(getParentExtension().getParentZone(),crs,null);
+				         reback.putBool("success", true);
+				      } catch (SFSCreateRoomException e) {
+				         e.printStackTrace();
+				         reback.putBool("success", false);
+				      }finally{
+				         //send("createRoom", reback, sender);
+				      }
+			      }
+			      
+			    
+			   
 
 }
