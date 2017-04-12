@@ -31,7 +31,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
         int user_founder = params.getInt("founder");
         String descrizione = params.getUtfString("descr");
         int min_trophy = params.getInt("trophies");
-        int type = params.getInt("type");
+        String type = params.getUtfString("type");
         String position = params.getUtfString("location");
         int stemma = params.getInt("symbol");
         int minUsers = params.getInt("minUsers");
