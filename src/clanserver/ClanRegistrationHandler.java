@@ -1,5 +1,8 @@
 package clanserver;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.smartfoxserver.v2.api.CreateRoomSettings;
@@ -75,18 +78,36 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 	      	send("clan", success, user);
 	      	
 	    createRoom(user,params);
+	    Connection connection = null;
+	    connection = dbmanager.getConnection();
+	    String createTableSQL = "CREATE TABLE "  + clan_name +  "_chat("
+				+ "ID integer auto_increment  NOT NULL, "
+				+ "id_user integer DEFAULT NULL, "
+				+ "Message NVARCHAR(255) DEFAULT NULL, "
+				+ "PRIMARY KEY (ID), "
+				+ "CONSTRAINT messaggiatore FOREIGN KEY (id_user)  REFERENCES guesswho.users (id_user) ON DELETE CASCADE ON UPDATE CASCADE"
+				+ ")";
+	    
+	   
+	    PreparedStatement stmt = connection.prepareStatement(createTableSQL);
+	    trace("query " + createTableSQL);
+	    stmt.execute(createTableSQL);
 		} 
 		catch (SQLException e) {
 		
 		ISFSObject error = new SFSObject();
 		error.putUtfString("error", "MySQL update error");
 		send("clan" , error, user);
+		e.printStackTrace();
+		trace(e.toString());
 	}
 
 			}	} catch (SQLException e1) {
 				ISFSObject error = new SFSObject();
 				error.putUtfString("error", "MySQL error");
 				send("clan" , error, user);
+				e1.printStackTrace();
+				trace(e1.toString());
 			}
 	
 }
