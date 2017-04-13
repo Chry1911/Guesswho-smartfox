@@ -42,6 +42,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 		trace("Session----------" + session);
 		
 		 ISFSObject outData = (ISFSObject) event.getParameter(SFSEventParam.LOGIN_OUT_DATA);
+		 ISFSObject outData2 = (ISFSObject) event.getParameter(SFSEventParam.LOGIN_OUT_DATA);
 		   User user = null;
 		   // Add data to the object
 		   
@@ -56,7 +57,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			connection = dbManager.getConnection();
 
 			// Build a prepared statement
-	        PreparedStatement stmt = connection.prepareStatement("SELECT id_user,username, password, trofei, gold, gems ,guesswho.users.position, clan_name, guesswho.clan.position as postoclan, trofei_total "
+	        PreparedStatement stmt = connection.prepareStatement("SELECT id_user,username, password, trofei, gold, gems ,guesswho.users.position, clan_name, guesswho.clan.position as postoclan, trofei_total, stemma "
 	        		+ "FROM Users "
 	        		+ "left outer join guesswho.clan on guesswho.users.id_user = guesswho.clan.utente_fondatore "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_2 "
@@ -123,6 +124,9 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				}
 				trace(clan_position);
 				
+				int stemma = res.getInt("stemma");
+				trace(stemma);
+				
 				int trofei_clan = res.getInt("trofei_total");
 				trace(trofei_clan);
 				
@@ -135,6 +139,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				outData.putUtfString("clan_name", clan_name);
 				outData.putUtfString("clan_position", clan_position);
 				outData.putInt("trofei_clan", trofei_clan);
+				outData.putInt("stemma", stemma);
 				
 				
 				if(clan_name != null || clan_name != ""){
@@ -145,6 +150,27 @@ public class LoginEventHandler extends BaseServerEventHandler {
 					//if(roomname.getName() != clan_name){
 						createRoom(user,clan_name);
 						trace("creata room clan " + clan_name);
+						String sql = "Select *, username from " + clan_name + "_chat "
+								+ "inner join guesswho.users on guesswho.users = guesswho." + clan_name + "_chat "
+								+ "limit 100 order by ID desc";
+						PreparedStatement stmt2 = connection.prepareStatement(sql);
+						ResultSet rs2 = stmt2.executeQuery();
+						while(rs2.next()){
+							int id = rs2.getInt("ID");
+							String nickname = rs2.getString("username");
+							String message = rs2.getString("message");
+							
+							trace(nickname);
+							trace(id);
+							trace(message);
+							
+							outData2.putInt("ID", id);
+							outData2.putUtfString("nickname", nickname);
+							outData2.putUtfString("message", message);
+							
+							
+						}
+						
 					}else{
 						
 						trace("room già esistente");
