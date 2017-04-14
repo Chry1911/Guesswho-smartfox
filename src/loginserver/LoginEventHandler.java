@@ -42,7 +42,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 		trace("Session----------" + session);
 		
 		 ISFSObject outData = (ISFSObject) event.getParameter(SFSEventParam.LOGIN_OUT_DATA);
-		 ISFSObject outData2 = (ISFSObject) event.getParameter(SFSEventParam.LOGIN_OUT_DATA);
+		// ISFSObject outData2 = (ISFSObject) event.getParameter(SFSEventParam.LOGIN_OUT_DATA);
 		   User user = null;
 		   // Add data to the object
 		   
@@ -150,9 +150,9 @@ public class LoginEventHandler extends BaseServerEventHandler {
 					//if(roomname.getName() != clan_name){
 						createRoom(user,clan_name);
 						trace("creata room clan " + clan_name);
-						String sql = "Select *, username from " + clan_name + "_chat "
-								+ "inner join guesswho.users on guesswho.users = guesswho." + clan_name + "_chat "
-								+ "limit 100 order by ID desc";
+						/*String sql = "Select *, username from " + clan_name + "_chat "
+								+ "inner join guesswho.users on guesswho.users.id_user = guesswho." + clan_name + "_chat.id_user "
+								+ "order by ID desc limit 100 ";
 						PreparedStatement stmt2 = connection.prepareStatement(sql);
 						ResultSet rs2 = stmt2.executeQuery();
 						while(rs2.next()){
@@ -164,12 +164,12 @@ public class LoginEventHandler extends BaseServerEventHandler {
 							trace(id);
 							trace(message);
 							
-							outData2.putInt("ID", id);
-							outData2.putUtfString("nickname", nickname);
-							outData2.putUtfString("message", message);
+							//outData.putInt("ID", id);
+							//outData.putUtfString("nickname", nickname);
+							//outData.putUtfString("message", message);
+							//outData.putSFSArray("arrayMessage", array);
 							
-							
-						}
+						}*/
 						
 					}else{
 						
