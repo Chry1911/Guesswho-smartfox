@@ -1,6 +1,10 @@
 package clanserver;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.smartfoxserver.v2.db.IDBManager;
 import com.smartfoxserver.v2.entities.User;
@@ -11,6 +15,7 @@ import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 public class ChatRegistrationHandler extends BaseClientRequestHandler {
 	
 	Object obj = null;
+	Date date;
 	
 	public void handleClientRequest(User user, ISFSObject params){
 		trace("Sto chiedendo al server di registrare la chat utenti clan");
@@ -18,15 +23,34 @@ public class ChatRegistrationHandler extends BaseClientRequestHandler {
 		String clan_name = params.getUtfString("clan_name");
 		int id_user = params.getInt("user");
 		String message = params.getUtfString("message");
+		String datetime = params.getUtfString("date");
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		
 			
-			String sql = "Insert into " + clan_name + "_chat(id_user, message) values (?,?)";
+			String sql = "Insert into " + clan_name + "_chat(id_user, message,datamex) values (?,?,?)";
 			try {
+				 DateFormat readFormat = new SimpleDateFormat( "DD/mm/yyyy");
+
+				    DateFormat writeFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+				    
+				  
+				       try {
+						date = readFormat.parse( datetime );
+					} catch (ParseException e) {
+						trace("vediamo l'errore dato");
+						e.printStackTrace();
+					}
+				   
+
+				    String formattedDate = "";
+				    if( date != null ) {
+				    formattedDate = writeFormat.format( date );
+				    }
+				    
 				trace("sono entrato nel primo try");
 				 obj = dbmanager.executeInsert(sql,
-	                     new Object[] {id_user, message});
+	                     new Object[] {id_user, message, formattedDate});
 				 
 				 ISFSObject success = new SFSObject();
 			      	success.putUtfString("success" ,"Message storage");

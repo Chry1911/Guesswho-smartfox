@@ -80,12 +80,17 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 	    createRoom(user,params);
 	    Connection connection = null;
 	    connection = dbmanager.getConnection();
+	    //String v = "";
+	    String vincolo = RandomString();
+	    trace("stampiamo il vincolo" + vincolo);
+	    
 	    String createTableSQL = "CREATE TABLE "  + clan_name +  "_chat("
 				+ "ID integer auto_increment  NOT NULL, "
 				+ "id_user integer DEFAULT NULL, "
 				+ "Message NVARCHAR(255) DEFAULT NULL, "
+				+ "DataMex DATETIME DEFAULT NULL, "
 				+ "PRIMARY KEY (ID), "
-				+ "CONSTRAINT messaggiatore FOREIGN KEY (id_user)  REFERENCES guesswho.users (id_user) ON DELETE CASCADE ON UPDATE CASCADE"
+				+ "CONSTRAINT " + vincolo + " FOREIGN KEY (id_user)  REFERENCES guesswho.users (id_user) ON DELETE CASCADE ON UPDATE CASCADE"
 				+ ")";
 	    
 	   
@@ -143,7 +148,14 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 		      }
 		      
 		    
-		   
+	public String RandomString() {
+		 String alphaNumerics = "qwertyuiopasdfghjklzxcvbnm1234567890";
+		   String str = "";
+		    for (int i = 0; i < 8; i++) {
+		    str += alphaNumerics.charAt((int) (Math.random() * alphaNumerics.length()));
+				}
+			return str;
+	}
 
 	
 }
