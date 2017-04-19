@@ -1,6 +1,9 @@
 package clanserver;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.smartfoxserver.v2.db.IDBManager;
 import com.smartfoxserver.v2.entities.User;
@@ -36,8 +39,17 @@ public class ReturnChatHandler extends BaseClientRequestHandler {
 			{
 	          
 				SFSObject result = new SFSObject();
-				  result.putSFSArray("success", arr);
-				  send("returnchat", result, user);
+				result.putSFSArray("success", arr);
+				send("returnchat", result, user);
+				  
+				  
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date = new Date();
+				dateFormat.format(date);
+				SFSObject result2 = new SFSObject();
+				result2.putUtfString("dataodierna", dateFormat.format(date));
+				send("returnchat", result2, user);
+				  
 			}
 	}catch (SQLException e) {
 		
