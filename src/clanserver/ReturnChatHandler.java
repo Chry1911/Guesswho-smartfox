@@ -37,18 +37,22 @@ public class ReturnChatHandler extends BaseClientRequestHandler {
 			
 			if (arr.size() > 0)
 			{
-	          
-				SFSObject result = new SFSObject();
-				result.putSFSArray("success", arr);
-				send("returnchat", result, user);
-				  
-				  
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date date = new Date();
 				dateFormat.format(date);
-				SFSObject result2 = new SFSObject();
-				result2.putUtfString("dataodierna", dateFormat.format(date));
-				send("returnchat", result2, user);
+				
+				long data = date.getTime();
+				
+				SFSObject result = new SFSObject();
+				result.putSFSArray("success", arr);
+				result.putLong("dataodierna", data);
+				send("returnchat", result, user);
+				  
+				  
+				
+				
+				
+				
 				  
 			}
 	}catch (SQLException e) {
