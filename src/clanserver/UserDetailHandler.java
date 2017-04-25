@@ -14,8 +14,8 @@ public class UserDetailHandler extends BaseClientRequestHandler{
 
 	Object obj = null;
 	public void handleClientRequest(User user, ISFSObject params) {
-		//int id_user = params.getInt("user_id");
-		String username = params.getUtfString("username");
+		int id_user = params.getInt("user_id");
+		//String username = params.getUtfString("username");
 		trace("Sto richiedendo al server i dettagli di uno user");
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
@@ -24,7 +24,7 @@ public class UserDetailHandler extends BaseClientRequestHandler{
 			trace("Ho fatto l'accesso per richiedere al server la mia query");
 			ISFSArray arr = dbmanager.executeQuery("select * from guesswho.users "
 					+ "where username = ? "
-					, new Object[] {username});
+					, new Object[] {id_user});
 			if (arr.size() > 0)
 			{
 			  SFSObject result = new SFSObject();
