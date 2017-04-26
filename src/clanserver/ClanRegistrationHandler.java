@@ -130,9 +130,8 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 		      crs.setMaxUsers(20);
 		      crs.setAutoRemoveMode(SFSRoomRemoveMode.NEVER_REMOVE);
 		      crs.setDynamic(true);
-		      
 		      crs.setExtension(res);
-		      
+		     
 		     
 			      
 			      ISFSObject reback = SFSObject.newInstance();

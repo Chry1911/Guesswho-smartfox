@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+//import java.util.Iterator;
 import java.util.List;
 
 import com.smartfoxserver.bitswarm.sessions.ISession;
@@ -57,7 +58,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			connection = dbManager.getConnection();
 
 			// Build a prepared statement
-	        PreparedStatement stmt = connection.prepareStatement("SELECT id_user,username, password, trofei, gold, gems ,guesswho.users.position, clan_name, guesswho.clan.position as postoclan, trofei_total, stemma "
+	        PreparedStatement stmt = connection.prepareStatement("SELECT id_user,username, password, trofei, gold, gems ,guesswho.users.position, id_clan ,clan_name, guesswho.clan.position as postoclan, trofei_total, stemma "
 	        		+ "FROM Users "
 	        		+ "left outer join guesswho.clan on guesswho.users.id_user = guesswho.clan.utente_fondatore "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_2 "
@@ -110,6 +111,9 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				}
 				trace(position);
 				
+				int clan_id = res.getInt("id_clan");
+				trace(clan_id);
+				
 				String clan_name = res.getString("clan_name");
 				
 				if (clan_name == null){
@@ -136,6 +140,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				outData.putInt("gold", gold);
 				outData.putInt("gems", gems);
 				outData.putUtfString("position", position);
+				outData.putInt("clan_id", clan_id);
 				outData.putUtfString("clan_name", clan_name);
 				outData.putUtfString("clan_position", clan_position);
 				outData.putInt("trofei_clan", trofei_clan);
@@ -146,7 +151,9 @@ public class LoginEventHandler extends BaseServerEventHandler {
 					
 				List<Room> roomname = getParentExtension().getParentZone().getRoomList();
 				trace("la lista delle stanze attive " + roomname.toString());
-					if(!roomname.contains(clan_name)){
+				/*Iterator<Room> iterator = roomname.iterator();
+				while(iterator.hasNext()){*/
+					if(!roomname.equals(clan_name)){
 					//if(roomname.getName() != clan_name){
 						createRoom(user,clan_name);
 						trace("creata room clan " + clan_name);
@@ -176,6 +183,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 						trace("room già esistente");
 					}
 				}
+				//}
 					//createRoom(user,clan_name);
 			}
 		    

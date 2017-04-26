@@ -23,7 +23,7 @@ public class UserDetailHandler extends BaseClientRequestHandler{
 		try{
 			trace("Ho fatto l'accesso per richiedere al server la mia query");
 			ISFSArray arr = dbmanager.executeQuery("select * from guesswho.users "
-					+ "where username = ? "
+					+ "where id_user = ? "
 					, new Object[] {id_user});
 			if (arr.size() > 0)
 			{
