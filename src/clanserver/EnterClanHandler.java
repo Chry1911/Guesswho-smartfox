@@ -159,7 +159,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    							Statement stmt5;
 			    							
 			    							if(utente2 == 0){
-			    								String sql = "Update clan set utente_2 = " + userplayer;
+			    								String sql = "Update clan set utente_2 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente2 inserito nel clan");
@@ -167,7 +167,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							}else if (utente3 == 0) {
-			    								String sql = "Update clan set utente_3 = " + userplayer;
+			    								String sql = "Update clan set utente_3 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente3 inserito nel clan");
@@ -175,7 +175,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente4 == 0) {
-			    								String sql = "Update clan set utente_4 = " + userplayer;
+			    								String sql = "Update clan set utente_4 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente4 inserito nel clan");
@@ -183,7 +183,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente5 == 0) {
-			    								String sql = "Update clan set utente_5 = " + userplayer;
+			    								String sql = "Update clan set utente_5 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente5 inserito nel clan");
@@ -191,7 +191,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente6 == 0) {
-			    								String sql = "Update clan set utente_6 = " + userplayer;
+			    								String sql = "Update clan set utente_6 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente6 inserito nel clan");
@@ -199,7 +199,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente7 == 0) {
-			    								String sql = "Update clan set utente_7 = " + userplayer;
+			    								String sql = "Update clan set utente_7 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente7 inserito nel clan");
@@ -207,7 +207,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente8 == 0) {
-			    								String sql = "Update clan set utente_8 = " + userplayer;
+			    								String sql = "Update clan set utente_8 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente8 inserito nel clan");
@@ -215,7 +215,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente9 == 0) {
-			    								String sql = "Update clan set utente_9 = " + userplayer;
+			    								String sql = "Update clan set utente_9 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente9 inserito nel clan");
@@ -223,7 +223,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente10 == 0) {
-			    								String sql = "Update clan set utente_10 = " + userplayer;
+			    								String sql = "Update clan set utente_10 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente10 inserito nel clan");
@@ -231,7 +231,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente11 == 0) {
-			    								String sql = "Update clan set utente_11 = " + userplayer;
+			    								String sql = "Update clan set utente_11 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente11 inserito nel clan");
@@ -239,7 +239,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente12 == 0) {
-			    								String sql = "Update clan set utente_12 = " + userplayer;
+			    								String sql = "Update clan set utente_12 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente12 inserito nel clan");
@@ -247,7 +247,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente13 == 0) {
-			    								String sql = "Update clan set utente_13 = " + userplayer;
+			    								String sql = "Update clan set utente_13 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente13 inserito nel clan");
@@ -255,7 +255,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente14 == 0) {
-			    								String sql = "Update clan set utente_14 = " + userplayer;
+			    								String sql = "Update clan set utente_14 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente14 inserito nel clan");
@@ -263,7 +263,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente15 == 0) {
-			    								String sql = "Update clan set utente_15 = " + userplayer;
+			    								String sql = "Update clan set utente_15 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente15 inserito nel clan");
@@ -271,7 +271,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente16 == 0) {
-			    								String sql = "Update clan set utente_16 = " + userplayer;
+			    								String sql = "Update clan set utente_16 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente16 inserito nel clan");
@@ -279,7 +279,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente17 == 0) {
-			    								String sql = "Update clan set utente_17 = " + userplayer;
+			    								String sql = "Update clan set utente_17 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente17 inserito nel clan");
@@ -287,7 +287,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente18 == 0) {
-			    								String sql = "Update clan set utente_18 = " + userplayer;
+			    								String sql = "Update clan set utente_18 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente18 inserito nel clan");
@@ -295,7 +295,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente19 == 0) {
-			    								String sql = "Update clan set utente_19 = " + userplayer;
+			    								String sql = "Update clan set utente_19 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente19 inserito nel clan");
@@ -303,7 +303,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								break;
 			    							} else if (utente20 == 0) {
-			    								String sql = "Update clan set utente_20 = " + userplayer;
+			    								String sql = "Update clan set utente_20 = " + userplayer + "where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente20 inserito nel clan");
