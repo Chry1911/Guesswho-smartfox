@@ -151,12 +151,15 @@ public class LoginEventHandler extends BaseServerEventHandler {
 					
 				List<Room> roomname = getParentExtension().getParentZone().getRoomList();
 				trace("la lista delle stanze attive " + roomname.toString());
+				
+				
 				/*Iterator<Room> iterator = roomname.iterator();
 				while(iterator.hasNext()){*/
-					if(!roomname.equals(clan_name)){
+					if(getParentExtension().getParentZone().getRoomByName(clan_name) != null){
 					//if(roomname.getName() != clan_name){
-						createRoom(user,clan_name);
-						trace("creata room clan " + clan_name);
+						//createRoom(user,clan_name);
+						//trace("creata room clan " + clan_name);
+						trace("room già esistente");
 						/*String sql = "Select *, username from " + clan_name + "_chat "
 								+ "inner join guesswho.users on guesswho.users.id_user = guesswho." + clan_name + "_chat.id_user "
 								+ "order by ID desc limit 100 ";
@@ -180,7 +183,9 @@ public class LoginEventHandler extends BaseServerEventHandler {
 						
 					}else{
 						
-						trace("room già esistente");
+						//trace("room già esistente");
+						createRoom(user,clan_name);
+						trace("creata room clan " + clan_name);
 					}
 				}
 				//}
