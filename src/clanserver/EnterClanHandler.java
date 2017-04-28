@@ -185,6 +185,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								// createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							}else if (utente3 == 0) {
 			    								String sql = "Update clan set utente_3 = " + userplayer + " where id_clan = " + clan_id;
@@ -206,6 +207,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								 //createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente4 == 0) {
 			    								String sql = "Update clan set utente_4 = " + userplayer + " where id_clan = " + clan_id;
@@ -226,6 +228,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								 //createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente5 == 0) {
 			    								String sql = "Update clan set utente_5 = " + userplayer + " where id_clan = " + clan_id;
@@ -246,6 +249,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								// createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente6 == 0) {
 			    								String sql = "Update clan set utente_6 = " + userplayer + " where id_clan = " + clan_id;
@@ -266,6 +270,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								// createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente7 == 0) {
 			    								String sql = "Update clan set utente_7 = " + userplayer + " where id_clan = " + clan_id;
@@ -286,6 +291,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								// createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente8 == 0) {
 			    								String sql = "Update clan set utente_8 = " + userplayer + " where id_clan = " + clan_id;
@@ -306,6 +312,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								 //createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente9 == 0) {
 			    								String sql = "Update clan set utente_9 = " + userplayer + " where id_clan = " + clan_id;
@@ -326,6 +333,8 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								 //createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
+			    						          break;
 			    							} else if (utente10 == 0) {
 			    								String sql = "Update clan set utente_10 = " + userplayer + " where id_clan = " + clan_id;
 			    								stmt5 = connection.createStatement();
@@ -345,6 +354,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								// createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente11 == 0) {
 			    								String sql = "Update clan set utente_11 = " + userplayer + " where id_clan = " + clan_id;
@@ -365,6 +375,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								 //createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente12 == 0) {
 			    								String sql = "Update clan set utente_12 = " + userplayer + " where id_clan = " + clan_id;
@@ -385,6 +396,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								 //createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente13 == 0) {
 			    								String sql = "Update clan set utente_13 = " + userplayer + " where id_clan = " + clan_id;
@@ -405,6 +417,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								// createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente14 == 0) {
 			    								String sql = "Update clan set utente_14 = " + userplayer + " where id_clan = " + clan_id;
@@ -425,6 +438,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								 //createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente15 == 0) {
 			    								String sql = "Update clan set utente_15 = " + userplayer + " where id_clan = " + clan_id;
@@ -445,6 +459,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								// createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente16 == 0) {
 			    								String sql = "Update clan set utente_16 = " + userplayer + " where id_clan = " + clan_id;
@@ -465,6 +480,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								 //createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente17 == 0) {
 			    								String sql = "Update clan set utente_17 = " + userplayer + " where id_clan = " + clan_id;
@@ -485,6 +501,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								 //createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente18 == 0) {
 			    								String sql = "Update clan set utente_18 = " + userplayer + " where id_clan = " + clan_id;
@@ -505,6 +522,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								// createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente19 == 0) {
 			    								String sql = "Update clan set utente_19 = " + userplayer + " where id_clan = " + clan_id;
@@ -525,6 +543,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								 //createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else if (utente20 == 0) {
 			    								String sql = "Update clan set utente_20 = " + userplayer + " where id_clan = " + clan_id;
@@ -545,6 +564,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", success, user);
 			    								 //createRoom(user,params);
 			    						          }
+			    						          createRoom(user,params);
 			    								break;
 			    							} else{
 			    								trace("impossibile inserire lo user");
@@ -553,7 +573,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								send("enterclan", error, user);
 			    								break;
 			    							}
-			    							createRoom(user,params);
+			    							
 			    							}
 			    					}else{
 			    						trace("clan con utenti massimi");
