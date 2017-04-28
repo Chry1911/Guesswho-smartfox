@@ -147,50 +147,35 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				outData.putInt("stemma", stemma);
 				
 				
-				if(clan_name != null || clan_name != ""){
+				
 					
 				List<Room> roomname = getParentExtension().getParentZone().getRoomList();
 				trace("la lista delle stanze attive " + roomname.toString());
 				
-				
-				/*Iterator<Room> iterator = roomname.iterator();
-				while(iterator.hasNext()){*/
-					if(getParentExtension().getParentZone().getRoomByName(clan_name) != null){
-					//if(roomname.getName() != clan_name){
-						//createRoom(user,clan_name);
-						//trace("creata room clan " + clan_name);
-						trace("room già esistente");
-						/*String sql = "Select *, username from " + clan_name + "_chat "
-								+ "inner join guesswho.users on guesswho.users.id_user = guesswho." + clan_name + "_chat.id_user "
-								+ "order by ID desc limit 100 ";
-						PreparedStatement stmt2 = connection.prepareStatement(sql);
-						ResultSet rs2 = stmt2.executeQuery();
-						while(rs2.next()){
-							int id = rs2.getInt("ID");
-							String nickname = rs2.getString("username");
-							String message = rs2.getString("message");
-							
-							trace(nickname);
-							trace(id);
-							trace(message);
-							
-							//outData.putInt("ID", id);
-							//outData.putUtfString("nickname", nickname);
-							//outData.putUtfString("message", message);
-							//outData.putSFSArray("arrayMessage", array);
-							
-						}*/
-						
-					}else{
-						
-						//trace("room già esistente");
-						createRoom(user,clan_name);
-						trace("creata room clan " + clan_name);
-					}
+				if(clan_name == null || clan_name.equals("")){
+					trace("non creare la room");
+					break;
 				}
+				
+		        if(getParentExtension().getParentZone().getRoomByName(clan_name) != null){
+					
+						trace("room già esistente");
+						
+						
+					} else {
+				
+					createRoom(user,clan_name);
+					trace("creata room clan " + clan_name);
+					
+				}
+					
+					}
+				
+        
+				
 				//}
 					//createRoom(user,clan_name);
-			}
+        
 		    
 		    //outData.putInt("number", 100);
 		   // Verify that one record was found

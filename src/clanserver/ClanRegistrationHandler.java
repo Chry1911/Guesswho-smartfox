@@ -11,6 +11,7 @@ import com.smartfoxserver.v2.db.IDBManager;
 //import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.SFSRoomRemoveMode;
 import com.smartfoxserver.v2.entities.User;
+import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSArray;
 import com.smartfoxserver.v2.entities.data.SFSObject;
@@ -73,10 +74,21 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 	          obj = dbmanager.executeInsert(sql,
 	                     new Object[] {clan_name, user_founder, stemma, descrizione, min_trophy, position, type, maxUsers, minUsers});
 	          
-	        ISFSObject success = new SFSObject();
+	          
+	          String sql2 = "select id_clan, clan_name, trofei_total,"
+	          		+ "stemma from guesswho.clan where clan_name = ? ";
+	          trace(sql2);
+	          
+	          ISFSArray arr = dbmanager.executeQuery(sql2
+						, new Object[] {clan_name});
+	          if (arr.size() > 0){
+	          
+	        SFSObject success = new SFSObject();
 	      	success.putUtfString("success" ,"Clan successfully registrated");
+	      	success.putSFSArray("daticlan", arr);
 	      	send("clan", success, user);
-	      	
+				}
+	          
 	    createRoom(user,params);
 	    Connection connection = null;
 	    connection = dbmanager.getConnection();
