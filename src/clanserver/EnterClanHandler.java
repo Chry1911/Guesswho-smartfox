@@ -171,8 +171,8 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								trace("utente2 inserito nel clan");
 			    								
 
-			    						          String sql2 = "select id_clan, clan_name, trofei_total,"
-			    						          		+ "stemma from guesswho.clan where id_clan = ? ";
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
 			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
@@ -193,9 +193,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente3 inserito nel clan");
 			    								
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -214,9 +214,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente4 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -235,9 +235,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente5 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -256,9 +256,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente6 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 				    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -277,9 +277,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente7 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -298,9 +298,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente8 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -319,9 +319,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente9 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -340,9 +340,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente10 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -361,9 +361,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente11 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -382,9 +382,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente12 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -403,9 +403,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente13 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -424,9 +424,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente14 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -445,9 +445,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente15 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -466,9 +466,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente16 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -487,9 +487,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement(); 
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente17 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -508,9 +508,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente18 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -529,9 +529,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5 = connection.createStatement();
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente19 inserito nel clan");
-			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
-				    						          trace(sql2);
+			    								String sql2 = "select id_clan, clan_name, trofei_total,"
+			    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
+			    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
 			    											, new Object[] {clan_id});
@@ -551,7 +551,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								stmt5.executeUpdate(sql);
 			    								trace("utente20 inserito nel clan");
 			    								 String sql2 = "select id_clan, clan_name, trofei_total,"
-				    						          		+ "stemma from guesswho.clan where id_clan = ? ";
+				    						          		+ "stemma, position from guesswho.clan where id_clan = ? ";
 				    						          trace(sql2);
 			    						          
 			    						          ISFSArray arr = dbmanager.executeQuery(sql2
@@ -633,7 +633,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 		      crs.setGroupId("clan_name " + clan_name);
 		      crs.setMaxVariablesAllowed(20);
 		      crs.setMaxUsers(20);
-		      crs.setAutoRemoveMode(SFSRoomRemoveMode.NEVER_REMOVE);
+		      crs.setAutoRemoveMode(SFSRoomRemoveMode.WHEN_EMPTY);
 		      crs.setDynamic(true);
 		      crs.setExtension(res);
 		     

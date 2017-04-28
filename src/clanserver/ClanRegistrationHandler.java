@@ -140,7 +140,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 		      crs.setGroupId("clan_name " + clan_name);
 		      crs.setMaxVariablesAllowed(20);
 		      crs.setMaxUsers(20);
-		      crs.setAutoRemoveMode(SFSRoomRemoveMode.NEVER_REMOVE);
+		      crs.setAutoRemoveMode(SFSRoomRemoveMode.WHEN_EMPTY);
 		      crs.setDynamic(true);
 		      crs.setExtension(res);
 		     

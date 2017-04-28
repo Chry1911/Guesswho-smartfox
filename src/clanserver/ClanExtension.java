@@ -31,6 +31,8 @@ public class ClanExtension extends SFSExtension{
 	    addRequestHandler("returnchat", ReturnChatHandler.class);
 	    
 	    addRequestHandler("enterclan", EnterClanHandler.class);
+	    
+	    addRequestHandler("exitclan", ExitClanHandler.class);
 	}
 
 	public void onDestroy(){
