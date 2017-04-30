@@ -11,6 +11,7 @@ import com.smartfoxserver.v2.entities.User;
 //import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
+
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 
 public class ExitClanHandler extends BaseClientRequestHandler {
@@ -315,5 +316,12 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 			send("userdetail" , error, user);
 			ex.printStackTrace();
 	}
+		finally {
+        	try{
+        		connection.close();
+        	}catch (SQLException e){
+        		trace("A SQL Error occurred: " + e.getMessage());
+        	}
+        }
 	}
 }

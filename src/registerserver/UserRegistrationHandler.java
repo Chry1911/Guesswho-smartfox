@@ -124,6 +124,8 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				send("register" , error, user);
 			}
 			
+			
+			
 				}
 	}
 
