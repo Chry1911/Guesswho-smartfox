@@ -18,7 +18,7 @@ public class TopUsersHandler extends BaseClientRequestHandler{
 		trace("Sto richiedendo al server i 100 migliori utenti");
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
-		
+		String nation = params.getUtfString("nation");
 		try{
 			trace("Ho fatto l'accesso per richiedere al server la mia query");
 			//obj = dbmanager.executeQuery("SELECT * FROM guesswho.Clan Limit 100 ", new Object[] {}); 
@@ -44,8 +44,8 @@ public class TopUsersHandler extends BaseClientRequestHandler{
 					+ "or guesswho.users.id_user = guesswho.clan.utente_18 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_19 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_20 "
-					+ "group by guesswho.users.username "
-					+ "order by trofei desc limit 100", new Object[] {});
+					+ "where guesswho.users.position Like ? group by guesswho.users.username "
+					+ "order by trofei desc limit 100", new Object[] {"%"+ nation + "%"});
 			
 			if (arr.size() > 0)
 			{

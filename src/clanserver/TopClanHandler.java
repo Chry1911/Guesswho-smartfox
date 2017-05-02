@@ -21,6 +21,7 @@ public class TopClanHandler extends BaseClientRequestHandler{
 		trace("Sto richiedendo al server i 100 migliori clan");
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
+		String nation = params.getUtfString("nation");
 		connection = null;
 		try{
 			trace("Ho fatto l'accesso per richiedere al server la mia query");
@@ -49,9 +50,9 @@ public class TopClanHandler extends BaseClientRequestHandler{
 					+ "or guesswho.users.id_user = guesswho.clan.utente_18 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_19 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_20 "
-					+ "group by guesswho.clan.clan_name order by guesswho.clan.trofei_total desc, "
+					+ "where guesswho.clan.position Like ? group by guesswho.clan.clan_name order by guesswho.clan.trofei_total desc, "
 					+ "guesswho.clan.clan_name limit 100", 
-					new Object[] {});
+					new Object[] {"%"+ nation + "%"});
 			if (arr.size() > 0)
 			{
 			  SFSObject result = new SFSObject();
