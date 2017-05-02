@@ -1,5 +1,6 @@
 package clanserver;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,6 +17,7 @@ public class ReturnChatHandler extends BaseClientRequestHandler {
 	
 	Object obj = null;
 	//private SmartFox sfs;
+	private Connection connection;
 	
 	public void handleClientRequest(User user, ISFSObject params){
 	
@@ -29,9 +31,10 @@ public class ReturnChatHandler extends BaseClientRequestHandler {
 				+ "order by datamex desc limit 100 ";
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
-		
+		connection = null;
 		try{
 
+			connection = dbmanager.getConnection();
 			ISFSArray arr =   dbmanager.executeQuery(sql,
 	                     new Object[] {});
 			
@@ -63,6 +66,14 @@ public class ReturnChatHandler extends BaseClientRequestHandler {
 		e.printStackTrace();
 		trace(e.toString());
 	}
+		finally{
+			try{
+				connection.close();
+			}catch (SQLException e){
+        		trace("A SQL Error occurred: " + e.getMessage());
+        	}
+        
+		}
 
 }
 	

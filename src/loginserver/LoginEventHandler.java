@@ -80,7 +80,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 					+ "or guesswho.users.id_user = guesswho.clan.utente_18 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_19 "
 					+ "or guesswho.users.id_user = guesswho.clan.utente_20 "
-	        		+ "where username='"+userName+"'");
+	        		+ "where username='"+userName+"' or email ='"+userName+"'");
 	        
 	    
                

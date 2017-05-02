@@ -26,6 +26,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 	
 	Object obj = null;
 	//private SmartFox sfs;
+	private Connection connection;
 	
 	public void handleClientRequest(User user, ISFSObject params){
 
@@ -46,8 +47,10 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		//sfs = null;
+		connection = null;
 		try {
 			trace("sono entrato nel primo try");
+			connection = dbmanager.getConnection();
 			//obj = dbmanager.executeQuery(sql2, new Object[] {1});
 			obj = dbmanager.executeQuery("SELECT * FROM Clan WHERE  clan_name=?", new Object[] {clan_name}); 
 			
@@ -90,8 +93,8 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 				}
 	          
 	    createRoom(user,params);
-	    Connection connection = null;
-	    connection = dbmanager.getConnection();
+	    //Connection connection = null;
+	    //connection = dbmanager.getConnection();
 	    //String v = "";
 	    String vincolo = RandomString();
 	    trace("stampiamo il vincolo" + vincolo);
@@ -126,8 +129,16 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 				e1.printStackTrace();
 				trace(e1.toString());
 			}
+		finally{
+			try{
+				connection.close();
+			}catch (SQLException e){
+        		trace("A SQL Error occurred: " + e.getMessage());
+        	}
+        }
+		}
 	
-}
+
 	
 	private void createRoom(User sender, ISFSObject params){
 		 String clan_name = params.getUtfString("name");

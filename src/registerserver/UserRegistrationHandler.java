@@ -1,5 +1,6 @@
 package registerserver;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -11,6 +12,7 @@ import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSArray;
 import com.smartfoxserver.v2.entities.data.SFSObject;
+
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 
 
@@ -18,6 +20,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 	
 	Object obj = null;
 	Date date;
+	private Connection connection;
 	public void handleClientRequest(User user, ISFSObject params){
 
 		trace("Sto chiedendo di registrare uno user al server");
@@ -40,12 +43,11 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		
-		
-		//String sql2 = "Select username from Users where email = " + email ;
-		//trace(sql2);
+		connection = null;
 		
 			try {
 				trace("sono entrato nel primo try");
+				connection = dbmanager.getConnection();
 				//obj = dbmanager.executeQuery(sql2, new Object[] {1});
 				obj = dbmanager.executeQuery("SELECT * FROM Users WHERE  email=? or username =?", new Object[] {email,name}); 
 				
@@ -123,6 +125,14 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				error.putUtfString("error", "MySQL error");
 				send("register" , error, user);
 			}
+			
+			finally {
+	        	try{
+	        		connection.close();
+	        	}catch (SQLException e){
+	        		trace("A SQL Error occurred: " + e.getMessage());
+	        	}
+	        }
 			
 			
 			

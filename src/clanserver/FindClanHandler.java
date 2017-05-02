@@ -1,5 +1,6 @@
 package clanserver;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.smartfoxserver.v2.db.IDBManager;
@@ -12,7 +13,7 @@ import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 public class FindClanHandler extends BaseClientRequestHandler {
 	
 	Object obj = null;
-
+    private Connection connection;
 	@Override
 	public void handleClientRequest(User user, ISFSObject params) {
 		trace("Sto chiedendo al server di trovare un clan con i miei parametri");
@@ -26,10 +27,11 @@ public class FindClanHandler extends BaseClientRequestHandler {
 		//boolean entry = params.getBool("can_entry");
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
+		connection = null;
 		//if (entry == true){
 		try{
 			trace("Ho fatto l'accesso per richiedere al server la mia query");
-			
+			connection = dbmanager.getConnection();
 		
 				trace("query con boolean = true");
 			//obj = dbmanager.executeQuery("SELECT * FROM guesswho.Clan Limit 100 ", new Object[] {}); 
@@ -57,6 +59,14 @@ public class FindClanHandler extends BaseClientRequestHandler {
 			error.putUtfString("error", "MySQL error");
 			send("findclan" , error, user);
 	}
+		finally{
+			try{
+				connection.close();
+			}catch (SQLException e){
+        		trace("A SQL Error occurred: " + e.getMessage());
+        	}
+        
+		}
 		
 		
 	//}

@@ -1,5 +1,6 @@
 package clanserver;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.smartfoxserver.v2.db.IDBManager;
@@ -13,15 +14,17 @@ public class TopClanNationHandler extends BaseClientRequestHandler{
 
 
 	Object obj = null;
+	private Connection connection;
 	public void handleClientRequest(User user, ISFSObject params) {
 	
 		trace("Sto richiedendo al server i 100 migliori clan per nazione");
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		String nation = params.getUtfString("nation");
-		
+		connection = null;
 		try{
 			trace("Ho fatto l'accesso per richiedere al server la mia query");
+			connection = dbmanager.getConnection();
 			//obj = dbmanager.executeQuery("SELECT * FROM guesswho.Clan Limit 100 ", new Object[] {}); 
 			ISFSArray arr = dbmanager.executeQuery("SELECT guesswho.clan.*, "
 					+ "count(guesswho.users.username) as numutenti "
@@ -62,6 +65,14 @@ public class TopClanNationHandler extends BaseClientRequestHandler{
 			error.putUtfString("error", "MySQL error");
 			send("topclansnation" , error, user);
 	}
+		finally{
+			try{
+				connection.close();
+			}catch (SQLException e){
+        		trace("A SQL Error occurred: " + e.getMessage());
+        	}
+        
+		}
 		}
 
 }

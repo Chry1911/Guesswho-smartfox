@@ -1,5 +1,6 @@
 package clanserver;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.DateFormat;
 //import java.text.ParseException;
@@ -16,7 +17,7 @@ public class ChatRegistrationHandler extends BaseClientRequestHandler {
 	
 	Object obj = null;
 	Date date;
-	
+	private Connection connection;
 	public void handleClientRequest(User user, ISFSObject params){
 		trace("Sto chiedendo al server di registrare la chat utenti clan");
 		
@@ -26,14 +27,14 @@ public class ChatRegistrationHandler extends BaseClientRequestHandler {
 		//String datetime = params.getUtfString("date");
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
-		
+		connection = null;
 			
 			String sql = "Insert into " + clan_name + "_chat(id_user, message,datamex) values (?,?,?)";
 			try {
 				 //DateFormat readFormat = new SimpleDateFormat( "DD/mm/yyyy");
 
 				   // DateFormat writeFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
-				    
+				connection = dbmanager.getConnection();  
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				date = new Date();
 				dateFormat.format(date); //2016/11/16 12:08:43
@@ -53,6 +54,12 @@ public class ChatRegistrationHandler extends BaseClientRequestHandler {
 			send("savingchat" , error, user);
 			e.printStackTrace();
 			trace(e.toString());
-	}
+	}finally{
+		try{
+			connection.close();
+		}catch (SQLException e){
+    		trace("A SQL Error occurred: " + e.getMessage());
+    	}
+    }
 	}
 }
