@@ -2,6 +2,7 @@ package clanserver;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 //import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -69,19 +70,33 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 			}else {
 				trace("registriamo il clan nel nostro database");
 		//String sql="INSERT into loginprova(name, email) values ('"+name+"','"+email+"')";
-		String sql = "INSERT into Clan(clan_name, utente_fondatore, stemma, descrizione, min_trofei, position, tipo, maxUsers, minUsers) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT into Clan(clan_name, stemma, descrizione, min_trofei, position, tipo, maxUsers, minUsers) values (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try{
 			
 		
 	          obj = dbmanager.executeInsert(sql,
-	                     new Object[] {clan_name, user_founder, stemma, descrizione, min_trophy, position, type, maxUsers, minUsers});
+	                     new Object[] {clan_name, stemma, descrizione, min_trophy, position, type, maxUsers, minUsers});
 	          
-	          
+	  
 	          String sql2 = "select id_clan, clan_name, trofei_total,"
 	          		+ "stemma from guesswho.clan where clan_name = ? ";
 	          trace(sql2);
 	          
+	          String sql4 = "select id_clan, clan_name, trofei_total,"
+		          		+ "stemma from guesswho.clan where clan_name = '" + clan_name + "'";
+	          
+	          PreparedStatement stmt3 = connection.prepareStatement(sql4);
+	          ResultSet rs = stmt3.executeQuery();
+				while(rs.next()){
+					int idclan = rs.getInt("id_clan");
+					trace(idclan);
+	          
+					String ruolo = "CAPO";
+					
+	          PreparedStatement stmt4 = connection.prepareStatement("INSERT INTO clan_users"+"(id_clan,id_user,ruolo) VALUES("+ idclan + ", " + user_founder + ", '" + ruolo + "' );");
+				stmt4.executeUpdate();
+				}
 	          ISFSArray arr = dbmanager.executeQuery(sql2
 						, new Object[] {clan_name});
 	          if (arr.size() > 0){
@@ -105,7 +120,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 				+ "Message NVARCHAR(255) DEFAULT NULL, "
 				+ "DataMex DATETIME DEFAULT NULL, "
 				+ "PRIMARY KEY (ID), "
-				+ "CONSTRAINT " + vincolo + " FOREIGN KEY (id_user)  REFERENCES guesswho.users (id_user) ON DELETE CASCADE ON UPDATE CASCADE"
+				+ "CONSTRAINT " + vincolo + " FOREIGN KEY (id_user)  REFERENCES guesswho.users (users.id_user) ON DELETE CASCADE ON UPDATE CASCADE"
 				+ ")";
 	    
 	   
@@ -154,6 +169,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 		      crs.setAutoRemoveMode(SFSRoomRemoveMode.WHEN_EMPTY);
 		      crs.setDynamic(true);
 		      crs.setExtension(res);
+		      
 		     
 		     
 			      

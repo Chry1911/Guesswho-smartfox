@@ -22,29 +22,12 @@ public class TopUsersHandler extends BaseClientRequestHandler{
 		try{
 			trace("Ho fatto l'accesso per richiedere al server la mia query");
 			//obj = dbmanager.executeQuery("SELECT * FROM guesswho.Clan Limit 100 ", new Object[] {}); 
-			ISFSArray arr = dbmanager.executeQuery("SELECT guesswho.users.id_user, guesswho.users.username, guesswho.users.trofei, guesswho.users.position, "
+			ISFSArray arr = dbmanager.executeQuery("SELECT guesswho.users.id_user, "
+					+ "guesswho.users.username, guesswho.users.trofei, guesswho.users.position, "
 					+ "guesswho.clan.clan_name FROM guesswho.Users "
-					+ "left outer join guesswho.clan on guesswho.users.id_user = guesswho.clan.utente_fondatore  "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_2 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_3 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_4 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_5 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_6 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_7 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_8 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_9 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_10 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_11 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_12 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_13 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_14 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_15 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_16 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_17 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_18 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_19 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_20 "
-					+ "where guesswho.users.position Like ? group by guesswho.users.username "
+					+ "LEFT JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
+                    + "LEFT JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
+					+ "where guesswho.users.position Like ? "
 					+ "order by trofei desc limit 100", new Object[] {"%"+ nation + "%"});
 			
 			if (arr.size() > 0)

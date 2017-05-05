@@ -58,28 +58,10 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			connection = dbManager.getConnection();
 
 			// Build a prepared statement
-	        PreparedStatement stmt = connection.prepareStatement("SELECT id_user,username, password, trofei, gold, gems ,guesswho.users.position, id_clan ,clan_name, guesswho.clan.position as postoclan, trofei_total, stemma "
+	        PreparedStatement stmt = connection.prepareStatement("SELECT users.id_user,username, password, trofei, gold, gems ,guesswho.users.position, clan.id_clan ,clan_name, guesswho.clan.position as postoclan, trofei_total, stemma "
 	        		+ "FROM Users "
-	        		+ "left outer join guesswho.clan on guesswho.users.id_user = guesswho.clan.utente_fondatore "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_2 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_3 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_4 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_5 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_6 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_7 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_8 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_9 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_10 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_11 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_12 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_13 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_14 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_15 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_16 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_17 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_18 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_19 "
-					+ "or guesswho.users.id_user = guesswho.clan.utente_20 "
+	        		+ "LEFT JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
+                    + "LEFT JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
 	        		+ "where username='"+userName+"' or email ='"+userName+"'");
 	        
 	    
