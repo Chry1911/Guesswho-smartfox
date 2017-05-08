@@ -1,6 +1,7 @@
 package registerserver;
 
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.smartfoxserver.v2.db.IDBManager;
@@ -8,6 +9,7 @@ import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
+
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 
 
@@ -24,8 +26,10 @@ public class UpdatePasswordHandler  extends BaseClientRequestHandler {
 		String email = params.getUtfString("email");
 		String password = params.getUtfString("password");
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
+		Connection connection = null;
 		try {
 			trace("sono entrato nel primo try");
+			connection = dbmanager.getConnection();
 			//obj = dbmanager.executeQuery(sql2, new Object[] {1});
 			ISFSArray ar = dbmanager.executeQuery("SELECT id_user FROM Users WHERE  email=? ", new Object[] {email}); 
 			
@@ -79,6 +83,17 @@ catch(SQLException e) {
 				error.putUtfString("error", "MySQL error");
 				send("updatepassword" , error, user);
 			}
+		
+		finally{
+			try{
+        		connection.close();
+        	}catch (SQLException e){
+        		e.getMessage();
+        	}
+		}
 			
 	
-}}
+}
+	
+	
+}

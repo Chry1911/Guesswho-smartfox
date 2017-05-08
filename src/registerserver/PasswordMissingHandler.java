@@ -1,6 +1,7 @@
 package registerserver;
 
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.mail.MessagingException;
@@ -13,6 +14,7 @@ import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
+
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 
 public class PasswordMissingHandler extends BaseClientRequestHandler {
@@ -24,7 +26,7 @@ public class PasswordMissingHandler extends BaseClientRequestHandler {
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		String email = params.getUtfString("email");
 		trace("Sto chiedendo di recuperare la password al server");
-		
+		Connection connection = null;
 	    RandomString captcha = new RandomString();
 	    String code = captcha.toString();
 		//se = new SendEmail(email);
@@ -32,6 +34,7 @@ public class PasswordMissingHandler extends BaseClientRequestHandler {
 				"Hello from GuessWho admin /n here your code to change password " + code);
 		
 		try {
+			connection = dbmanager.getConnection();
 			trace("sono entrato nel primo try");
 			//obj = dbmanager.executeQuery(sql2, new Object[] {1});
 			ISFSArray ar = dbmanager.executeQuery("SELECT id_user FROM Users WHERE  email=? ", new Object[] {email}); 
@@ -77,5 +80,13 @@ public class PasswordMissingHandler extends BaseClientRequestHandler {
 		error.putUtfString("error", "MySQL error");
 		send("passwordmissing" , error, user);
 	}
+		
+		finally{
+			try{
+        		connection.close();
+        	}catch (SQLException e){
+        		 e.getMessage();
+        	}
+		}
 	
 }}

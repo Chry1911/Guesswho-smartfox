@@ -11,6 +11,7 @@ import com.smartfoxserver.bitswarm.sessions.ISession;
 import com.smartfoxserver.v2.api.CreateRoomSettings;
 import com.smartfoxserver.v2.api.CreateRoomSettings.RoomExtensionSettings;
 import com.smartfoxserver.v2.core.ISFSEvent;
+import com.smartfoxserver.v2.core.SFSConstants;
 import com.smartfoxserver.v2.core.SFSEventParam;
 import com.smartfoxserver.v2.db.IDBManager;
 import com.smartfoxserver.v2.entities.Room;
@@ -127,6 +128,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				outData.putUtfString("clan_position", clan_position);
 				outData.putInt("trofei_clan", trofei_clan);
 				outData.putInt("stemma", stemma);
+				outData.putUtfString(SFSConstants.NEW_LOGIN_NAME, username);
 				
 				
 				

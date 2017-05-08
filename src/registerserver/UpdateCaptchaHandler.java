@@ -1,5 +1,6 @@
 package registerserver;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.smartfoxserver.v2.db.IDBManager;
@@ -14,7 +15,7 @@ public class UpdateCaptchaHandler  extends BaseClientRequestHandler {
 
 	Object obj = null;
 	
-	
+	Connection connection = null;
 	@Override
 	public void handleClientRequest(User user, ISFSObject params) {
 		// TODO Auto-generated method stub
@@ -26,6 +27,7 @@ public class UpdateCaptchaHandler  extends BaseClientRequestHandler {
 		
 		
 		try {
+			connection = dbmanager.getConnection();
 			trace("sono entrato nel primo try");
 			//obj = dbmanager.executeQuery(sql2, new Object[] {1});
 			ISFSArray ar = dbmanager.executeQuery("SELECT captcha FROM Users WHERE  email=? ", new Object[] {email}); 
@@ -68,6 +70,16 @@ public class UpdateCaptchaHandler  extends BaseClientRequestHandler {
 				error.putUtfString("error", "MySQL error");
 				send("updatecaptcha" , error, user);
 			}
+		
+		finally{
+			try{
+        		connection.close();
+        	}catch (SQLException e){
+        		e.getMessage();
+        	}
+		}
 			
 	
-}}
+}
+	
+}

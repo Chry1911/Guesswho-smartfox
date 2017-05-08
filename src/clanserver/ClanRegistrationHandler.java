@@ -120,7 +120,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 				+ "Message NVARCHAR(255) DEFAULT NULL, "
 				+ "DataMex DATETIME DEFAULT NULL, "
 				+ "PRIMARY KEY (ID), "
-				+ "CONSTRAINT " + vincolo + " FOREIGN KEY (id_user)  REFERENCES guesswho.users (users.id_user) ON DELETE CASCADE ON UPDATE CASCADE"
+				+ "CONSTRAINT " + vincolo + " FOREIGN KEY (id_user)  REFERENCES guesswho.users (id_user) ON DELETE CASCADE ON UPDATE CASCADE"
 				+ ")";
 	    
 	   
