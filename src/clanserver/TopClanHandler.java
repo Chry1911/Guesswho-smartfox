@@ -29,11 +29,12 @@ public class TopClanHandler extends BaseClientRequestHandler{
 			connection = dbmanager.getConnection();
 			//obj = dbmanager.executeQuery("SELECT * FROM guesswho.Clan Limit 100 ", new Object[] {}); 
 			ISFSArray arr = dbmanager.executeQuery("SELECT guesswho.clan.*, "
-					+ "count(guesswho.users.username) as numutenti "
+					+ "count(guesswho.clan_users.id_user) as numutenti "
 					+ "FROM guesswho.Clan "
 					+ "LEFT JOIN CLAN_USERS ON CLAN_USERS.ID_CLAN = CLAN.ID_CLAN "
                     + "LEFT JOIN USERS ON Users.ID_user = CLAN_USERS.ID_user "
-					+ "where guesswho.clan.position Like ? and clan_name Like ? order by guesswho.clan.trofei_total desc, "
+					+ "where guesswho.clan.position Like ? and clan_name Like ? "
+					+ "group by guesswho.clan.id_clan order by guesswho.clan.trofei_total desc, "
 					+ "guesswho.clan.clan_name limit 100", 
 					new Object[] {"%"+ nation + "%", "%" + search + "%"});
 			if (arr.size() > 0)
