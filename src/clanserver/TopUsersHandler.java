@@ -35,6 +35,10 @@ public class TopUsersHandler extends BaseClientRequestHandler{
 			  SFSObject result = new SFSObject();
 			  result.putSFSArray("success", arr);
 			  send("topusers", result, user);
+			}else{
+				 SFSObject result2 = new SFSObject();
+				  result2.putUtfString("nosuccess", "Nessuna corrispondenza trovata");
+				  send("topusers", result2, user);
 			}
 			
 			

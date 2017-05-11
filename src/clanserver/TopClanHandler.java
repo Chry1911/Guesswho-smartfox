@@ -42,6 +42,10 @@ public class TopClanHandler extends BaseClientRequestHandler{
 			  SFSObject result = new SFSObject();
 			  result.putSFSArray("success", arr);
 			  send("topclans", result, user);
+			}else{
+				 SFSObject result2 = new SFSObject();
+				  result2.putUtfString("nosuccess", "Nessuna corrispondenza trovata");
+				  send("topclans", result2, user);
 			}
 			
 			
