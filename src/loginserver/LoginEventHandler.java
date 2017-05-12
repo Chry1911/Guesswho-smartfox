@@ -59,7 +59,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			connection = dbManager.getConnection();
 
 			// Build a prepared statement
-	        PreparedStatement stmt = connection.prepareStatement("SELECT users.id_user,username, password, trofei, gold, gems ,guesswho.users.position, clan.id_clan ,clan_name, guesswho.clan.position as postoclan, trofei_total, stemma "
+	        PreparedStatement stmt = connection.prepareStatement("SELECT users.id_user,username, password, trofei, gold, gems ,guesswho.users.position, clan.id_clan ,clan_name, guesswho.clan.position as postoclan, trofei_total, stemma, ruolo "
 	        		+ "FROM Users "
 	        		+ "LEFT JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
                     + "LEFT JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
@@ -117,6 +117,12 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				int trofei_clan = res.getInt("trofei_total");
 				trace(trofei_clan);
 				
+				String ruolo = res.getString("ruolo");
+				if (ruolo == null){
+					ruolo = "";
+				}
+				trace(ruolo);
+				
 				outData.putInt("id_user", id_user);
 				outData.putUtfString("nome_utente", username);
 				outData.putInt("trofei", trofei);
@@ -126,6 +132,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				outData.putInt("clan_id", clan_id);
 				outData.putUtfString("clan_name", clan_name);
 				outData.putUtfString("clan_position", clan_position);
+				outData.putUtfString("ruolo", ruolo);
 				outData.putInt("trofei_clan", trofei_clan);
 				outData.putInt("stemma", stemma);
 				outData.putUtfString(SFSConstants.NEW_LOGIN_NAME, username);
