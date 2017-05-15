@@ -28,7 +28,7 @@ public class ClanDetailHandler extends BaseClientRequestHandler{
 			connection = dbmanager.getConnection();
 			//obj = dbmanager.executeQuery("SELECT * FROM guesswho.Clan Limit 100 ", new Object[] {}); 
 			ISFSArray arr = dbmanager.executeQuery("select users.id_user,users.username, users.trofei, "
-					+ "users.position, guesswho.clan.* from users "
+					+ "users.position, guesswho.clan.*, guesswho.clan_users.ruolo from users "
 					+ "INNER JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
                     + "INNER JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
 					+ "where GUESSWHO.CLAN.id_clan = ? order by users.trofei desc "

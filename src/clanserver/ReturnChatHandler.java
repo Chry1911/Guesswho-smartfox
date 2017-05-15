@@ -26,8 +26,9 @@ public class ReturnChatHandler extends BaseClientRequestHandler {
 		
 		String clan_name = params.getUtfString("clan_name");
 		
-		String sql = "Select " + clan_name +"_chat.*, users.username from " + clan_name + "_chat "
-				+ "inner join guesswho.users on guesswho.users.id_user = guesswho." + clan_name + "_chat.id_user "
+		String sql = "Select " + clan_name +"_chat.*, users.username, clan_users.ruolo from " + clan_name + "_chat "
+				+ "left join guesswho.users on guesswho.users.id_user = guesswho." + clan_name + "_chat.id_user  "
+				+ "left join clan_users on clan_users.id_user = guesswho." + clan_name + "_chat.id_user "
 				+ "order by datamex desc limit 100 ";
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
