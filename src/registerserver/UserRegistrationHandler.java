@@ -60,7 +60,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				if(ar.size() >= 1){
 					trace("Errore email già presente nel sistema");
 					ISFSObject error = new SFSObject();
-					error.putUtfString("error", "email già registrata nel database");
+					error.putUtfString("error", "account già esistente nel db");
 					send("register" , error, user);
 					//return;
 				}else {
