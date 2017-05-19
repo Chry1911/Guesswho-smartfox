@@ -40,6 +40,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 				int membri = q.getInt("membri");
 				trace(clan_name + ": clan_name");
 				trace(utente + ": id_user");
+				trace(membri + ": membri");
 				
 				
 				Statement stmt5;
