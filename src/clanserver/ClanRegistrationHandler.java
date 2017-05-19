@@ -83,8 +83,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 	          		+ "stemma from guesswho.clan where clan_name = ? ";
 	          trace(sql2);
 	          
-	          String sql4 = "select id_clan, clan_name, trofei_total,"
-		          		+ "stemma from guesswho.clan where clan_name = '" + clan_name + "'";
+	          String sql4 = "select * from guesswho.clan where clan_name = '" + clan_name + "'";
 	          
 	          PreparedStatement stmt3 = connection.prepareStatement(sql4);
 	          ResultSet rs = stmt3.executeQuery();
@@ -111,6 +110,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 	    //Connection connection = null;
 	    //connection = dbmanager.getConnection();
 	    //String v = "";
+	    /*
 	    String vincolo = RandomString();
 	    trace("stampiamo il vincolo" + vincolo);
 	    
@@ -126,7 +126,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 	   
 	    PreparedStatement stmt = connection.prepareStatement(createTableSQL);
 	    trace("query " + createTableSQL);
-	    stmt.execute(createTableSQL);
+	    stmt.execute(createTableSQL);*/
 		} 
 		catch (SQLException e) {
 		

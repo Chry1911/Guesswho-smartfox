@@ -21,7 +21,8 @@ public class ChatRegistrationHandler extends BaseClientRequestHandler {
 	public void handleClientRequest(User user, ISFSObject params){
 		trace("Sto chiedendo al server di registrare la chat utenti clan");
 		
-		String clan_name = params.getUtfString("clan_name");
+		//String clan_name = params.getUtfString("clan_name");
+		int id_clan = params.getInt("clan");
 		int id_user = params.getInt("user");
 		String message = params.getUtfString("message");
 		//String datetime = params.getUtfString("date");
@@ -29,7 +30,9 @@ public class ChatRegistrationHandler extends BaseClientRequestHandler {
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		connection = null;
 			
-			String sql = "Insert into " + clan_name + "_chat(id_user, message,datamex) values (?,?,?)";
+			//String sql = "Insert into " + clan_name + "_chat(id_user, message,datamex) values (?,?,?)";
+		
+		     String sql = "Insert into chat_general(id_user, id_clan,message,datamex) values(?,?,?,?)";
 			try {
 				 //DateFormat readFormat = new SimpleDateFormat( "DD/mm/yyyy");
 
@@ -42,7 +45,7 @@ public class ChatRegistrationHandler extends BaseClientRequestHandler {
 				    
 				trace("sono entrato nel primo try");
 				 obj = dbmanager.executeInsert(sql,
-	                     new Object[] {id_user, message, dateFormat.format(date)});
+	                     new Object[] {id_user ,id_clan ,message, dateFormat.format(date)});
 				 
 				 ISFSObject success = new SFSObject();
 			      	success.putUtfString("success" ,"Message storage");

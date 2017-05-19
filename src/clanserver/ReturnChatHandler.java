@@ -24,12 +24,16 @@ public class ReturnChatHandler extends BaseClientRequestHandler {
 		
 		trace("Sto chiedendo al server di restutire le chat di un clan");
 		
-		String clan_name = params.getUtfString("clan_name");
+		//String clan_name = params.getUtfString("clan_name");
 		
-		String sql = "Select " + clan_name +"_chat.*, users.username, clan_users.ruolo from " + clan_name + "_chat "
-				+ "left join guesswho.users on guesswho.users.id_user = guesswho." + clan_name + "_chat.id_user  "
-				+ "left join clan_users on clan_users.id_user = guesswho." + clan_name + "_chat.id_user "
-				+ "order by datamex desc limit 100 ";
+		//String sql = "Select " + clan_name +"_chat.*, users.username, clan_users.ruolo from " + clan_name + "_chat "
+			//	+ "left join guesswho.users on guesswho.users.id_user = guesswho." + clan_name + "_chat.id_user  "
+				//+ "left join clan_users on clan_users.id_user = guesswho." + clan_name + "_chat.id_user "
+				//+ "order by datamex desc limit 100 ";
+		
+		int id_clan = params.getInt("clan");
+		
+		String sql = "select * from chat_general where id_clan = " + id_clan + " limit 100";
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		connection = null;
