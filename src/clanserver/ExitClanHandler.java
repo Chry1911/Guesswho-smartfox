@@ -28,10 +28,18 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 		try {
 			connection = dbmanager.getConnection();
 			//PreparedStatement stmt4 = connection.prepareStatement("Select * from Clan where id_clan = " + clan_id);
-			PreparedStatement stmt4 = connection.prepareStatement("select guesswho.clan_users.*, count(guesswho.clan_users.id_user) as membri ,guesswho.clan.clan_name from guesswho.clan_users "
+			/*PreparedStatement stmt4 = connection.prepareStatement("select guesswho.clan_users.*, count(guesswho.clan_users.id_user) as membri ,guesswho.clan.clan_name from guesswho.clan_users "
 					+ "left join guesswho.clan on guesswho.clan.id_clan = guesswho.clan_users.id_clan "
 					+ "left join guesswho.users on guesswho.users.id_user = guesswho.clan_users.id_user "
-					+ "where guesswho.clan_users.id_clan = " + clan_id + " and guesswho.clan_users.id_user = " + userplayer + " group by guesswho.clan_users.id_clan");
+					+ "where guesswho.clan_users.id_clan = " + clan_id + " and guesswho.clan_users.id_user = " + userplayer + " group by guesswho.clan_users.id_clan");*/
+			
+			String ssql = "select  guesswho.clan_users.*,count(guesswho.clan_users.id_user) as membri ,guesswho.clan.clan_name "
+					  +	"from guesswho.clan_users " 
+					+ "left join guesswho.clan on guesswho.clan.id_clan = guesswho.clan_users.id_clan "
+					+ "left join guesswho.users on guesswho.users.id_user = guesswho.clan_users.id_user "
+					+ "where guesswho.clan_users.id_clan = " + clan_id ;	
+			
+			PreparedStatement stmt4 = connection.prepareStatement(ssql);
 					
 			ResultSet q = stmt4.executeQuery();
 			while(q.next()){
