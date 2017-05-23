@@ -33,7 +33,10 @@ public class ReturnChatHandler extends BaseClientRequestHandler {
 		
 		int id_clan = params.getInt("clan");
 		
-		String sql = "select * from chat_general where id_clan = " + id_clan + " limit 100";
+		String sql = "select chat_general.*, users.username, clan_users.ruolo from chat_general "
+				+ "left join guesswho.users on guesswho.users.id_user = guesswho.chat_general.id_user  "
+				+ "left join clan_users on clan_users.id_user = guesswho.chat_general.id_user "
+				+ "where guesswho.chat_general.id_clan = " + id_clan + " limit 100";
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		connection = null;

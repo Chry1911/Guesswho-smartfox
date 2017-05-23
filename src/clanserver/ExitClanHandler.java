@@ -33,7 +33,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					+ "left join guesswho.users on guesswho.users.id_user = guesswho.clan_users.id_user "
 					+ "where guesswho.clan_users.id_clan = " + clan_id + " and guesswho.clan_users.id_user = " + userplayer + " group by guesswho.clan_users.id_clan");*/
 			
-			String ssql = "select  guesswho.clan_users.*,count(guesswho.clan_users.id_user) as membri ,guesswho.clan.clan_name "
+			String ssql = "select count(guesswho.clan_users.id_user) as membri "
 					  +	"from guesswho.clan_users " 
 					+ "left join guesswho.clan on guesswho.clan.id_clan = guesswho.clan_users.id_clan "
 					+ "left join guesswho.users on guesswho.users.id_user = guesswho.clan_users.id_user "
@@ -43,13 +43,35 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					
 			ResultSet q = stmt4.executeQuery();
 			while(q.next()){
-				int utente = q.getInt("id_user");
-				String clan_name = q.getString("clan_name");
+				//int utente = q.getInt("id_user");
+				//String clan_name = q.getString("clan_name");
 				int membri = q.getInt("membri");
-				trace(clan_name + ": clan_name");
-				trace(utente + ": id_user");
+				//trace(clan_name + ": clan_name");
+				//trace(utente + ": id_user");
 				trace(membri + ": membri");
 				
+				
+				
+				String ssql2 = "select guesswho.clan_users.id_user, guesswho.clan_users.ruolo, guesswho.clan_users.id_clan, guesswho.clan.clan_name "
+						+	"from guesswho.clan_users " 
+						+ "left join guesswho.clan on guesswho.clan.id_clan = guesswho.clan_users.id_clan "
+						+ "left join guesswho.users on guesswho.users.id_user = guesswho.clan_users.id_user "
+						+ "where guesswho.clan_users.id_clan = " + clan_id + " and guesswho.clan_users.id_user = " + userplayer;
+				
+				trace(ssql2);
+				
+				PreparedStatement stmt1 = connection.prepareStatement(ssql2);
+				ResultSet rs = stmt1.executeQuery();
+				
+				trace(rs);
+				
+				while(rs.next()){
+					int utente = rs.getInt("clan_users.id_user");
+					String clan_name = rs.getString("clan_name");
+					
+					trace(clan_name + ": clan_name");
+					trace(utente + ": id_user");
+					
 				
 				Statement stmt5;
 				SFSObject success = new SFSObject();
@@ -100,7 +122,6 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 							send("exitclan", success, user);
 							break;
 					}
-					
 				
 				else{
 					trace("impossibile cancellare lo user");
@@ -109,6 +130,8 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					send("exitclan", error, user);
 					break;
 				}
+				}
+				
 			}
 			
 		}catch (SQLException ex) {
