@@ -111,11 +111,11 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 							stmt5.executeUpdate(sql3);
 							trace("Clan eliminato");
 							
-							String sql4 = "Drop Table " + clan_name + "_chat ";
-							trace("Stampiamo la query che elimina la tabella chat_clan " + sql4);
-							stmt5 = connection.createStatement();
-							stmt5.executeUpdate(sql4);
-							trace("tabella chat eliminata");
+							//String sql4 = "Drop Table " + clan_name + "_chat ";
+							//trace("Stampiamo la query che elimina la tabella chat_clan " + sql4);
+							//stmt5 = connection.createStatement();
+							//stmt5.executeUpdate(sql4);
+							//trace("tabella chat eliminata");
 							
 							success.putUtfString("success", "utente eliminato dal clan");
 							//success.putSFSArray("daticlan", arr);
