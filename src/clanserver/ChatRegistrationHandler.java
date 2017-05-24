@@ -21,22 +21,20 @@ public class ChatRegistrationHandler extends BaseClientRequestHandler {
 	public void handleClientRequest(User user, ISFSObject params){
 		trace("Sto chiedendo al server di registrare la chat utenti clan");
 		
-		//String clan_name = params.getUtfString("clan_name");
+		
 		int id_clan = params.getInt("clan");
 		int id_user = params.getInt("user");
 		String message = params.getUtfString("message");
-		//String datetime = params.getUtfString("date");
+		
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		connection = null;
 			
-			//String sql = "Insert into " + clan_name + "_chat(id_user, message,datamex) values (?,?,?)";
+			
 		
 		     String sql = "Insert into chat_general(id_user, id_clan,message,datamex) values(?,?,?,?)";
 			try {
-				 //DateFormat readFormat = new SimpleDateFormat( "DD/mm/yyyy");
-
-				   // DateFormat writeFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+				
 				connection = dbmanager.getConnection();  
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				date = new Date();

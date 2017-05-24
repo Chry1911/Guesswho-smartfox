@@ -17,7 +17,7 @@ public class UserDetailHandler extends BaseClientRequestHandler{
 	private Connection connection;
 	public void handleClientRequest(User user, ISFSObject params) {
 		int id_user = params.getInt("user_id");
-		//String username = params.getUtfString("username");
+		
 		trace("Sto richiedendo al server i dettagli di uno user");
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();

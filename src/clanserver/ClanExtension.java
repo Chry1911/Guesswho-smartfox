@@ -14,11 +14,11 @@ public class ClanExtension extends SFSExtension{
 		
 	    addRequestHandler("topclans", TopClanHandler.class);
 	    
-	    //addRequestHandler("topclansnation", TopClanNationHandler.class);
+	  
 	    
 	    addRequestHandler("topusers", TopUsersHandler.class);
 	    
-	   // addRequestHandler("topusersnation", TopUsersNationHandler.class);
+	  
 	    
 	    addRequestHandler("clanmembers", ClanMemberHandler.class);
 	    

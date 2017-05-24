@@ -24,23 +24,27 @@ public class FindClanHandler extends BaseClientRequestHandler {
 		int minUsers = params.getInt("minUsers");
 		int minTrophy = params.getInt("minTrophy");
 		int usertrophy = params.getInt("user_trophy");
-		//boolean entry = params.getBool("can_entry");
+		
 		
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		connection = null;
-		//if (entry == true){
+		
 		try{
 			trace("Ho fatto l'accesso per richiedere al server la mia query");
 			connection = dbmanager.getConnection();
 		
-				trace("query con boolean = true");
-			//obj = dbmanager.executeQuery("SELECT * FROM guesswho.Clan Limit 100 ", new Object[] {}); 
+				
+			
 			ISFSArray arr = dbmanager.executeQuery("SELECT clan.id_clan, clan.stemma, clan.clan_name, clan.maxusers, clan.trofei_total, "
 					+ "Left(guesswho.clan.descrizione, 21) as preview, "
 					+ "count(guesswho.clan_users.id_user) as numutenti "
-					+ "FROM guesswho.Clan where clan_name "
-					+ "Like ? and position Like ? and maxUsers <= ? and minUsers >= ? and min_trofei >= ? "
+					+ "FROM guesswho.Clan "
+					+ "LEFT JOIN CLAN_USERS ON CLAN_USERS.ID_CLAN = CLAN.ID_CLAN "
+                    + "LEFT JOIN USERS ON Users.ID_user = CLAN_USERS.ID_user "
+					+ "where clan_name "
+					+ "Like ? and guesswho.clan.position Like ? and maxUsers <= ? and minUsers >= ? and min_trofei >= ? "
 					+ "and min_trofei <= " + usertrophy + "  and (tipo = 'Public' or tipo = 'Invito') "
+					+ "group by clan_users.id_clan"
 					+ "order by trofei_total desc, clan_name", 
 					new Object[] {"%"+ name + "%", "%"+ location + "%", maxUsers, minUsers, minTrophy});
 			
@@ -72,34 +76,6 @@ public class FindClanHandler extends BaseClientRequestHandler {
 		}
 		
 		
-	//}
-		/*
-		else if(entry == false){
-			try{
-				trace("Ho fatto l'accesso per richiedere al server la mia query");
-				
-			
-					trace("query con boolean = false");
-				//obj = dbmanager.executeQuery("SELECT * FROM guesswho.Clan Limit 100 ", new Object[] {}); 
-				ISFSArray arr2 = dbmanager.executeQuery("SELECT * FROM guesswho.Clan where clan_name "
-						+ "Like ? and position = ? and maxUsers <= ? and minUsers >= ? and min_trofei = ? "
-						+ "and (tipo = 'pubblico' or tipo = 'invito') "
-						+ "order by trofei_total desc, clan_name", 
-						new Object[] {name, location, maxUsers, minUsers, usertrophy});
-				if (arr2.size() > 0)
-				{
-				  SFSObject result = new SFSObject();
-				  result.putSFSArray("success", arr2);
-				  send("findclan", result, user);
-				}
-			
-	}catch (SQLException ex) {
-		ISFSObject error = new SFSObject();
-		error.putUtfString("error", "MySQL error");
-		send("findclan" , error, user);
-		}
-		}
-		}
-		*/
+	
 	}}
 	

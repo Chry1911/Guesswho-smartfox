@@ -26,7 +26,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 	
 	Object obj = null;
 	Object obj2 = null;
-	//private SmartFox sfs;
+
 	
 	public void handleClientRequest(User user, ISFSObject params){
 		trace("Sto chiedendo di registrare uno user dentro un clan al server");
@@ -105,7 +105,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								success.putSFSArray("daticlan", arr);
 			    								send("enterclan", success, user);
-			    								// createRoom(user,params);
+			    								
 			    						          }
 			    						          createRoom(user,params);
 			    								break;
@@ -146,7 +146,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 		        	errData.addParameter("SQL Error: " + e.getMessage());
 		        	e.printStackTrace();
 		    		trace(e.toString());
-		        	// Sends response about mysql errors
+		        	
 		    		
 		        }
 		        finally {
@@ -163,7 +163,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 	
 	private void createRoom(User sender, ISFSObject params){
 		 String clan_name = params.getUtfString("clan_name");
-		//Room myfirstroom = getParentExtension().getParentZone().getRoomByName(clan_name);
+		
 		RoomExtensionSettings res = new RoomExtensionSettings("Server","clanserver.ClanExtension");
 		      CreateRoomSettings crs = new CreateRoomSettings();
 		     

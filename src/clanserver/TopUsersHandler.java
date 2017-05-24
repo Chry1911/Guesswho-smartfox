@@ -21,7 +21,7 @@ public class TopUsersHandler extends BaseClientRequestHandler{
 		String nation = params.getUtfString("nation");
 		try{
 			trace("Ho fatto l'accesso per richiedere al server la mia query");
-			//obj = dbmanager.executeQuery("SELECT * FROM guesswho.Clan Limit 100 ", new Object[] {}); 
+			
 			ISFSArray arr = dbmanager.executeQuery("SELECT guesswho.users.id_user, "
 					+ "guesswho.users.username, guesswho.users.trofei, guesswho.users.position, "
 					+ "guesswho.clan.clan_name, guesswho.clan.stemma FROM guesswho.Users "

@@ -26,7 +26,7 @@ import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 public class ClanRegistrationHandler extends BaseClientRequestHandler {
 	
 	Object obj = null;
-	//private SmartFox sfs;
+	
 	private Connection connection;
 	
 	public void handleClientRequest(User user, ISFSObject params){
@@ -44,32 +44,32 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
         int maxUsers = params.getInt("maxUsers");
        
         
-		//String email = params.getUtfString("email");
+		
 
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
-		//sfs = null;
+		
 		connection = null;
 		try {
 			trace("sono entrato nel primo try");
 			connection = dbmanager.getConnection();
-			//obj = dbmanager.executeQuery(sql2, new Object[] {1});
+			
 			obj = dbmanager.executeQuery("SELECT * FROM Clan WHERE  clan_name=?", new Object[] {clan_name}); 
 			
 			trace(obj.toString());
 			
 			SFSArray ar = (SFSArray) obj;
 			
-			//trace(condition.toString() + "condizione");
+			
 			
 			if(ar.size() >= 1){
 				trace("Errore clan già presente nel sistema");
 				ISFSObject error = new SFSObject();
 				error.putUtfString("error", "clan già registrato nel database");
 				send("clan" , error, user);
-				//return;
+				
 			}else {
 				trace("registriamo il clan nel nostro database");
-		//String sql="INSERT into loginprova(name, email) values ('"+name+"','"+email+"')";
+		
 		String sql = "INSERT into Clan(clan_name, stemma, descrizione, min_trofei, position, tipo, maxUsers, minUsers) values (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try{
@@ -107,26 +107,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 				}
 	          
 	    createRoom(user,params);
-	    //Connection connection = null;
-	    //connection = dbmanager.getConnection();
-	    //String v = "";
-	    /*
-	    String vincolo = RandomString();
-	    trace("stampiamo il vincolo" + vincolo);
-	    
-	    String createTableSQL = "CREATE TABLE "  + clan_name +  "_chat("
-				+ "ID integer auto_increment  NOT NULL, "
-				+ "id_user integer DEFAULT NULL, "
-				+ "Message NVARCHAR(255) DEFAULT NULL, "
-				+ "DataMex DATETIME DEFAULT NULL, "
-				+ "PRIMARY KEY (ID), "
-				+ "CONSTRAINT " + vincolo + " FOREIGN KEY (id_user)  REFERENCES guesswho.users (id_user) ON DELETE CASCADE ON UPDATE CASCADE"
-				+ ")";
-	    
 	   
-	    PreparedStatement stmt = connection.prepareStatement(createTableSQL);
-	    trace("query " + createTableSQL);
-	    stmt.execute(createTableSQL);*/
 		} 
 		catch (SQLException e) {
 		
@@ -157,7 +138,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 	
 	private void createRoom(User sender, ISFSObject params){
 		 String clan_name = params.getUtfString("name");
-		//Room myfirstroom = getParentExtension().getParentZone().getRoomByName(clan_name);
+		
 		RoomExtensionSettings res = new RoomExtensionSettings("Server","clanserver.ClanExtension");
 		      CreateRoomSettings crs = new CreateRoomSettings();
 		     
