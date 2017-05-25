@@ -44,7 +44,7 @@ public class FindClanHandler extends BaseClientRequestHandler {
 					+ "where clan_name "
 					+ "Like ? and guesswho.clan.position Like ? and maxUsers <= ? and minUsers >= ? and min_trofei >= ? "
 					+ "and min_trofei <= " + usertrophy + "  and (tipo = 'Public' or tipo = 'Invito') "
-					+ "group by clan_users.id_clan"
+					+ "group by clan_users.id_clan "
 					+ "order by trofei_total desc, clan_name", 
 					new Object[] {"%"+ name + "%", "%"+ location + "%", maxUsers, minUsers, minTrophy});
 			

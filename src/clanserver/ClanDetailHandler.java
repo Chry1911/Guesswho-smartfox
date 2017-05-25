@@ -28,7 +28,7 @@ public class ClanDetailHandler extends BaseClientRequestHandler{
 			connection = dbmanager.getConnection();
 			
 			ISFSArray arr = dbmanager.executeQuery("select users.id_user,users.username, users.trofei, "
-					+ "users.position, guesswho.clan.*, guesswho.clan_users.ruolo, count(guesswho.clan_users.id_user) as numutenti from users "
+					+ "users.position, guesswho.clan.*, guesswho.clan_users.ruolo from users "
 					+ "INNER JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
                     + "INNER JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
 					+ "where GUESSWHO.CLAN.id_clan = ? order by users.trofei desc "
