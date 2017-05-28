@@ -104,6 +104,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    								
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								success.putSFSArray("daticlan", arr);
+			    								success.putUtfString("nuovomembro", "E' entrato a far parte del clan un nuovo membro: " + userplayer);
 			    								send("enterclan", success, user);
 			    								
 			    						          }

@@ -81,7 +81,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					
 				
 					success.putUtfString("success", "utente eliminato dal clan");
-					
+					success.putUtfString("uscitamembro", "E' uscito dal clan il membro: " + userplayer);
 					send("exitclan", success, user);
 					
 					
