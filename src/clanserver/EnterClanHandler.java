@@ -87,7 +87,15 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    						
 			    				          PreparedStatement stmt4 = connection.prepareStatement("INSERT INTO clan_users"+"(id_clan,id_user,ruolo) VALUES("+ clan_id + ", " + userplayer + ", '" + ruolo + "' );");
 			    						
+			    				         
+			    							
 			    					
+			    						stmt4.executeUpdate();
+			    						
+			    						String ssql = "Insert into chat_general(id_user, id_clan, message, datamex) Values (1, " + clan_id + ", 'E entrato a far parte del clan lo user " + userplayer + "', Now())";
+			    						
+			    						stmt4 = connection.prepareStatement(ssql);
+			    						
 			    						stmt4.executeUpdate();
 			    						
 			    							SFSObject success = new SFSObject();
@@ -101,10 +109,11 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    											, new Object[] {clan_id});
 			    						          if (arr.size() > 0){
 			    								
+			    						        	  
 			    								
 			    								success.putUtfString("success", "utente inserito nel clan");
 			    								success.putSFSArray("daticlan", arr);
-			    								success.putUtfString("nuovomembro", "E' entrato a far parte del clan un nuovo membro: " + userplayer);
+			    								
 			    								send("enterclan", success, user);
 			    								
 			    						          }

@@ -78,10 +78,16 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					stmt5.executeUpdate(sql);
 					trace("utente eliminato dal clan");
 					
+					String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now())";
+					
+					stmt4 = connection.prepareStatement(ssql3);
+					
+					stmt4.executeUpdate();
+					
 					
 				
 					success.putUtfString("success", "utente eliminato dal clan");
-					success.putUtfString("uscitamembro", "E' uscito dal clan il membro: " + userplayer);
+					
 					send("exitclan", success, user);
 					
 					
