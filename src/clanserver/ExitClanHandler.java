@@ -77,7 +77,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					String query = "select guesswho.users.id_user, max(trofei) as numerotrofei from Users "
 							+  "left join guesswho.clan_users on guesswho.users.id_user = guesswho.clan_users.id_user "
 							+ "left join guesswho.clan on guesswho.clan.id_clan = guesswho.clan_users.id_clan "				
-							+ "where guesswho.clan_users.id_clan = " + clan_id + " group by guesswho.Users.id_user order by numerotrofei desc limit 1 ";
+							+ "where guesswho.clan_users.id_clan = " + clan_id + " and guesswho.users.id_user <> " + userplayer + " group by guesswho.Users.id_user order by numerotrofei desc limit 1 ";
 					
 					trace("stampiamo la query" + query);
 					
@@ -91,7 +91,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					trace("id dell'utente con + trofei " + id_utente);
 					
 			
-					String update = "Update clan_users set ruolo = 'CAPO' where id_user = " + id_utente + " and id_clan = " + clan_id;
+					String update = "Update clan_users set ruolo = 'CAPO' where id_user = " + id_utente + " and id_user <> " + userplayer + " and id_clan = " + clan_id;
 					trace("stampiamo la query di update" + update);
 					
 					stmt4 = connection.prepareStatement(update);

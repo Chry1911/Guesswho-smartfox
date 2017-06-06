@@ -70,14 +70,17 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 					try{
 						trace("sono entrato nel secondo try");
 						
-					    DateFormat readFormat = new SimpleDateFormat( "DD/mm/yyyy");
+					    DateFormat readFormat = new SimpleDateFormat( "yyyy/mm/dd");
+						//DateFormat readFormat = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 
-					    DateFormat writeFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+					    DateFormat writeFormat = new SimpleDateFormat( "yyyy-mm-dd HH:MM:SS");
 					    
 					  
+					    trace(birth_day);
+					    
 					       date = readFormat.parse( birth_day );
 					      
-					   
+					   trace(date);
 
 					    String formattedDate = "";
 					    if( date != null ) {
@@ -101,7 +104,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 
 						String sql = "INSERT into Users(first_name, last_name, date_of_birth, username, password, email, trofei,gems,gold, position, captcha) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				          obj = dbmanager.executeInsert(sql,
-				                     new Object[] {first_name,last_name, writeFormat.format( date ), name, password, email, trofei, gemme, gold, nation, code});
+				                     new Object[] {first_name,last_name, formattedDate, name, password, email, trofei, gemme, gold, nation, code});
 				          
 				          ISFSObject success = new SFSObject();
 				      	success.putUtfString("success" ,"User successfully registrated");
