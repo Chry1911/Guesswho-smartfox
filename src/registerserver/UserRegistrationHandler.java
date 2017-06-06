@@ -58,9 +58,9 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				//trace(condition.toString() + "condizione");
 				
 				if(ar.size() >= 1){
-					trace("Errore email già presente nel sistema");
+					trace("Errore email giï¿½ presente nel sistema");
 					ISFSObject error = new SFSObject();
-					error.putUtfString("error", "account già esistente nel db");
+					error.putUtfString("error", "account giï¿½ esistente nel db");
 					send("register" , error, user);
 					//return;
 				}else {
@@ -76,11 +76,13 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 					    
 					  
 					       date = readFormat.parse( birth_day );
+					      
 					   
 
 					    String formattedDate = "";
 					    if( date != null ) {
 					    formattedDate = writeFormat.format( date );
+					    trace(formattedDate);
 					    }
 					    
 					    if(trofei >= 0){
@@ -99,7 +101,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 
 						String sql = "INSERT into Users(first_name, last_name, date_of_birth, username, password, email, trofei,gems,gold, position, captcha) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				          obj = dbmanager.executeInsert(sql,
-				                     new Object[] {first_name,last_name, date, name, password, email, trofei, gemme, gold, nation, code});
+				                     new Object[] {first_name,last_name, writeFormat.format( date ), name, password, email, trofei, gemme, gold, nation, code});
 				          
 				          ISFSObject success = new SFSObject();
 				      	success.putUtfString("success" ,"User successfully registrated");

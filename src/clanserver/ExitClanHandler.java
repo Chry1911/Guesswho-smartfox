@@ -62,15 +62,68 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 				while(rs.next()){
 					int utente = rs.getInt("clan_users.id_user");
 					String clan_name = rs.getString("clan_name");
+					String ruolo = rs.getString("ruolo");
 					
 					trace(clan_name + ": clan_name");
 					trace(utente + ": id_user");
+					trace(ruolo + ": ruolo");
 					
 				
 				Statement stmt5;
 				SFSObject success = new SFSObject();
 				
-				if(utente == userplayer && membri > 1 ){
+				if(utente == userplayer && ruolo.equals("CAPO") && membri > 1){
+					
+					String query = "select guesswho.users.id_user, max(trofei) as numerotrofei from Users "
+							+  "left join guesswho.clan_users on guesswho.users.id_user = guesswho.clan_users.id_user "
+							+ "left join guesswho.clan on guesswho.clan.id_clan = guesswho.clan_users.id_clan "				
+							+ "where guesswho.clan_users.id_clan = " + clan_id + " group by guesswho.Users.id_user order by numerotrofei desc limit 1 ";
+					
+					trace("stampiamo la query" + query);
+					
+					PreparedStatement stmt = connection.prepareStatement(query);
+					ResultSet r = stmt.executeQuery();
+					
+					trace(r);
+					
+					while(r.next()){
+					int id_utente = r.getInt("id_user");
+					trace("id dell'utente con + trofei " + id_utente);
+					
+			
+					String update = "Update clan_users set ruolo = 'CAPO' where id_user = " + id_utente + " and id_clan = " + clan_id;
+					trace("stampiamo la query di update" + update);
+					
+					stmt4 = connection.prepareStatement(update);
+					stmt4.executeUpdate();
+					
+				
+					//qui cancelliamo il capo di quel clan
+					
+					String sql = "delete from clan_users where id_clan = " + clan_id + " and id_user = " + userplayer;
+					trace("Stampiamo la query che elimina l'utente da quel clan " + sql);
+					stmt5 = connection.createStatement();
+					stmt5.executeUpdate(sql);
+					trace("utente eliminato dal clan");
+					
+					String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now())";
+					
+					stmt4 = connection.prepareStatement(ssql3);
+					
+					stmt4.executeUpdate();
+					
+					
+				
+					success.putUtfString("success", "utente eliminato dal clan");
+					
+					send("exitclan", success, user);
+					
+					
+					break;
+					}
+				}
+				
+				else if(utente == userplayer && membri > 1 && ! ruolo.equals("CAPO")){
 					
 					String sql = "delete from clan_users where id_clan = " + clan_id + " and id_user = " + userplayer;
 					trace("Stampiamo la query che elimina l'utente da quel clan " + sql);
@@ -94,7 +147,9 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					break;
 					
 							
-					}else if(utente == userplayer && membri == 1){
+					}
+				
+				else if(utente == userplayer && membri == 1 && ruolo.equals("CAPO")){
 						String sql = "delete from clan_users where id_clan = " + clan_id + " and id_user = " + userplayer;
 						trace("Stampiamo la query che elimina l'utente da quel clan " + sql);
 						stmt5 = connection.createStatement();
