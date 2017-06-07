@@ -74,6 +74,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 				
 				if(utente == userplayer && ruolo.equals("CAPO") && membri > 1){
 					
+				
 					String query = "select guesswho.users.id_user, max(trofei) as numerotrofei from Users "
 							+  "left join guesswho.clan_users on guesswho.users.id_user = guesswho.clan_users.id_user "
 							+ "left join guesswho.clan on guesswho.clan.id_clan = guesswho.clan_users.id_clan "				
