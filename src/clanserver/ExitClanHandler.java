@@ -74,14 +74,23 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 				
 				if(utente == userplayer && ruolo.equals("CAPO") && membri > 1){
 					
-				
-					String query = "select guesswho.users.id_user, max(trofei) as numerotrofei from Users "
+					//dobbiamo fare i vari update per ruolo(parire da co-capo a recluta)
+					
+					
+					//String role = "";
+					String query = "";
+					
+					if(CoCapoExists(clan_id) == true){
+						
+						trace("entro se c'è co-capo");
+					
+					//query con co-capo(forse dobbiamo vedere prima se c'è un co-capo??)
+					query = "select guesswho.users.id_user, max(trofei) as numerotrofei from Users "
 							+  "left join guesswho.clan_users on guesswho.users.id_user = guesswho.clan_users.id_user "
 							+ "left join guesswho.clan on guesswho.clan.id_clan = guesswho.clan_users.id_clan "				
-							+ "where guesswho.clan_users.id_clan = " + clan_id + " and guesswho.users.id_user <> " + userplayer + " group by guesswho.Users.id_user order by numerotrofei desc limit 1 ";
+							+ "where guesswho.clan_users.id_clan = " + clan_id + " and guesswho.users.id_user <> " + userplayer + " and guesswho.clan_users.ruolo = 'CO-CAPO' group by guesswho.Users.id_user order by numerotrofei desc limit 1 ";
 					
 					trace("stampiamo la query" + query);
-					
 					PreparedStatement stmt = connection.prepareStatement(query);
 					ResultSet r = stmt.executeQuery();
 					
@@ -98,7 +107,6 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					stmt4 = connection.prepareStatement(update);
 					stmt4.executeUpdate();
 					
-				
 					//qui cancelliamo il capo di quel clan
 					
 					String sql = "delete from clan_users where id_clan = " + clan_id + " and id_user = " + userplayer;
@@ -121,8 +129,107 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					
 					
 					break;
+						}} else if(CoCapoExists(clan_id) == false && AnzianoExists(clan_id) == true){
+							
+							trace("entro se sono anziano");
+							
+							query = "select guesswho.users.id_user, max(trofei) as numerotrofei from Users "
+									+  "left join guesswho.clan_users on guesswho.users.id_user = guesswho.clan_users.id_user "
+									+ "left join guesswho.clan on guesswho.clan.id_clan = guesswho.clan_users.id_clan "				
+									+ "where guesswho.clan_users.id_clan = " + clan_id + " and guesswho.users.id_user <> " + userplayer + " and guesswho.clan_users.ruolo = 'ANZIANO' group by guesswho.Users.id_user order by numerotrofei desc limit 1 ";
+							trace("stampiamo la query" + query);
+							PreparedStatement stmt = connection.prepareStatement(query);
+							ResultSet r = stmt.executeQuery();
+							
+							trace(r);
+							
+							while(r.next()){
+							int id_utente = r.getInt("id_user");
+							trace("id dell'utente con + trofei " + id_utente);
+							
+					
+							String update = "Update clan_users set ruolo = 'CAPO' where id_user = " + id_utente + " and id_user <> " + userplayer + " and id_clan = " + clan_id;
+							trace("stampiamo la query di update" + update);
+							
+							stmt4 = connection.prepareStatement(update);
+							stmt4.executeUpdate();
+							
+							//qui cancelliamo il capo di quel clan
+							
+							String sql = "delete from clan_users where id_clan = " + clan_id + " and id_user = " + userplayer;
+							trace("Stampiamo la query che elimina l'utente da quel clan " + sql);
+							stmt5 = connection.createStatement();
+							stmt5.executeUpdate(sql);
+							trace("utente eliminato dal clan");
+							
+							String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now())";
+							
+							stmt4 = connection.prepareStatement(ssql3);
+							
+							stmt4.executeUpdate();
+							
+							
+						
+							success.putUtfString("success", "utente eliminato dal clan");
+							
+							send("exitclan", success, user);
+							
+							
+							break;}
+						}else {
+							
+							trace("entro se sono recluta");
+							
+							query = "select guesswho.users.id_user, max(trofei) as numerotrofei from Users "
+									+  "left join guesswho.clan_users on guesswho.users.id_user = guesswho.clan_users.id_user "
+									+ "left join guesswho.clan on guesswho.clan.id_clan = guesswho.clan_users.id_clan "				
+									+ "where guesswho.clan_users.id_clan = " + clan_id + " and guesswho.users.id_user <> " + userplayer + " and guesswho.clan_users.ruolo = 'RECLUTA' group by guesswho.Users.id_user order by numerotrofei desc limit 1 ";
+						
+							trace("stampiamo la query" + query);
+							PreparedStatement stmt = connection.prepareStatement(query);
+							ResultSet r = stmt.executeQuery();
+							
+							trace(r);
+							
+							while(r.next()){
+							int id_utente = r.getInt("id_user");
+							trace("id dell'utente con + trofei " + id_utente);
+							
+					
+							String update = "Update clan_users set ruolo = 'CAPO' where id_user = " + id_utente + " and id_user <> " + userplayer + " and id_clan = " + clan_id;
+							trace("stampiamo la query di update" + update);
+							
+							stmt4 = connection.prepareStatement(update);
+							stmt4.executeUpdate();
+							
+							//qui cancelliamo il capo di quel clan
+							
+							String sql = "delete from clan_users where id_clan = " + clan_id + " and id_user = " + userplayer;
+							trace("Stampiamo la query che elimina l'utente da quel clan " + sql);
+							stmt5 = connection.createStatement();
+							stmt5.executeUpdate(sql);
+							trace("utente eliminato dal clan");
+							
+							String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now())";
+							
+							stmt4 = connection.prepareStatement(ssql3);
+							
+							stmt4.executeUpdate();
+							
+							
+						
+							success.putUtfString("success", "utente eliminato dal clan");
+							
+							send("exitclan", success, user);
+							
+							
+							break;
+						}}
+					
+					
+					
 					}
-				}
+				
 				
 				else if(utente == userplayer && membri > 1 && ! ruolo.equals("CAPO")){
 					
@@ -201,4 +308,56 @@ public class ExitClanHandler extends BaseClientRequestHandler {
         	}
         }
 	}
+	
+	
+	public boolean CoCapoExists(int clan_id) throws SQLException{
+		Connection connection = null;
+		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
+		try {
+			connection = dbmanager.getConnection();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		String sql = "select count(ruolo) as numero from clan_users where ruolo = 'CO-CAPO' and id_clan = " + clan_id;
+		trace("Stampiamo la query che elimina l'utente da quel clan " + sql);
+		PreparedStatement stmt4 = connection.prepareStatement(sql);
+		
+		ResultSet q = stmt4.executeQuery();
+		while(q.next()){
+			
+			int membri = q.getInt("numero");
+		
+		trace("membri co-capo" + membri);
+		return true;
+		}
+		return false;
+	}
+	
+	public boolean AnzianoExists(int clan_id) throws SQLException{
+		Connection connection = null;
+		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
+		try {
+			connection = dbmanager.getConnection();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		String sql = "select count(ruolo) as numero from clan_users where ruolo = 'ANZIANO' and id_clan = " + clan_id;
+		trace("Stampiamo la query che elimina l'utente da quel clan " + sql);
+		PreparedStatement stmt4 = connection.prepareStatement(sql);
+		
+		ResultSet q = stmt4.executeQuery();
+		while(q.next()){
+			
+			int membri = q.getInt("numero");
+		
+		trace("membri anziani" + membri);
+		return true;
+		}
+		return false;
+		
+	}
+	
+	
 }
