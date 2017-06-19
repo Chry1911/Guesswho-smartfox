@@ -92,7 +92,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    					
 			    						stmt4.executeUpdate();
 			    						
-			    						String ssql = "Insert into chat_general(id_user, id_clan, message, datamex) Values (1, " + clan_id + ", 'E entrato a far parte del clan lo user " + userplayer + "', Now())";
+			    						String ssql = "Insert into chat_general(id_user, id_clan, message, datamex, type_not) Values (1, " + clan_id + ", 'E entrato a far parte del clan lo user " + userplayer + "', Now(), 1)";
 			    						
 			    						stmt4 = connection.prepareStatement(ssql);
 			    						

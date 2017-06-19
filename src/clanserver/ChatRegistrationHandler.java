@@ -32,18 +32,18 @@ public class ChatRegistrationHandler extends BaseClientRequestHandler {
 			
 			
 		
-		     String sql = "Insert into chat_general(id_user, id_clan,message,datamex) values(?,?,?,?)";
+		     String sql = "Insert into chat_general(id_user, id_clan,message,datamex, type_not) values(?,?,?,?,?)";
 			try {
 				
 				connection = dbmanager.getConnection();  
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				date = new Date();
 				dateFormat.format(date); //2016/11/16 12:08:43
-				       
+				int tipomex = 9;       
 				    
 				trace("sono entrato nel primo try");
 				 obj = dbmanager.executeInsert(sql,
-	                     new Object[] {id_user ,id_clan ,message, dateFormat.format(date)});
+	                     new Object[] {id_user ,id_clan ,message, dateFormat.format(date),tipomex});
 				 
 				 ISFSObject success = new SFSObject();
 			      	success.putUtfString("success" ,"Message storage");

@@ -115,7 +115,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					stmt5.executeUpdate(sql);
 					trace("utente eliminato dal clan");
 					
-					String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now())";
+					String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex, type_not) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now(), 2)";
 					
 					stmt4 = connection.prepareStatement(ssql3);
 					
@@ -162,7 +162,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 							stmt5.executeUpdate(sql);
 							trace("utente eliminato dal clan");
 							
-							String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now())";
+							String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex, type_not) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now(), 2)";
 							
 							stmt4 = connection.prepareStatement(ssql3);
 							
@@ -210,7 +210,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 							stmt5.executeUpdate(sql);
 							trace("utente eliminato dal clan");
 							
-							String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now())";
+							String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex, type_not) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now(),2)";
 							
 							stmt4 = connection.prepareStatement(ssql3);
 							
@@ -239,7 +239,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					stmt5.executeUpdate(sql);
 					trace("utente eliminato dal clan");
 					
-					String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now())";
+					String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex, type_not) Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now(), 2)";
 					
 					stmt4 = connection.prepareStatement(ssql3);
 					
