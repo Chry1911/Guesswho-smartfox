@@ -1,11 +1,14 @@
 package registerserver;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+//import java.util.Random;
 
 import com.smartfoxserver.v2.db.IDBManager;
 import com.smartfoxserver.v2.entities.User;
@@ -109,6 +112,60 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				          ISFSObject success = new SFSObject();
 				      	success.putUtfString("success" ,"User successfully registrated");
 				      	send("register", success, user);
+				      	
+				      	
+				      	
+				      	
+				      	trace("il server ora crea il deck per lo user");
+				      	
+				      	String sql2 = "Select id_user from Users where email = '" + email + "'";
+				      	
+				      	PreparedStatement stmt = connection.prepareStatement(sql2);
+
+						  ResultSet res = stmt.executeQuery();
+						    
+						  while(res.next()){
+							  
+							  trace("sono entrato nel while");
+							  int id_user = res.getInt("id_user");
+							  
+							  String deckname = "deck1";
+							  int selecteddeck = 1;
+							  String[]cards = generateCards(4);
+							  
+							  trace(id_user + "id dell utente");
+							  trace(deckname + "nome deck utente");
+							  
+							  
+							  String carte = "";
+							  for(int i= 0; i < cards.length; i++){
+								  trace(cards[i]);
+								  carte = carte + cards[i] + ",";
+								 
+							  }
+							  
+							  trace(carte + "carte");
+							  trace(selecteddeck + "deck selezionato dall'utente");
+							  
+							  
+							  String sql3 = "INSERT into Decks(id_user, deck_name, cards, selected_deck) "
+							  		+ "values (" + id_user + ",'" + deckname + "','" + carte + "', " + selecteddeck + ")";
+							  
+
+							  trace("query " + sql3);
+							  
+							  
+							  
+							  
+							  PreparedStatement stmt4 = connection.prepareStatement(sql3);
+	    						
+	    						stmt4.executeUpdate();
+	    						
+					          
+					          //ISFSObject result = new SFSObject();
+					      	success.putUtfString("success" ,"Deck created");
+					      	send("register", success, user);
+						  }
 					} 
 					
 		catch(SQLException e) {
@@ -142,6 +199,21 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 			
 			
 				}
+	
+	public String[] generateCards(int limit){
+		String[] arr = new String[limit];
+		int[] val = new int[limit];
+		
+		for (int i= 0; i < arr.length; i++){
+			val[i] = (int)(10 * Math.random());
+			arr[i] = String.valueOf(val[i]);
+			
+			trace("valore array " + arr[i]);
+			
+		}
+		return arr;
+		
+	}
 	}
 
 	
