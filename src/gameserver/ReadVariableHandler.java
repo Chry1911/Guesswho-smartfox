@@ -13,9 +13,10 @@ import com.smartfoxserver.v2.extensions.BaseServerEventHandler;
 
 public class ReadVariableHandler  extends BaseServerEventHandler {
 
+	User sender;
 	@Override
 	public void handleServerEvent(ISFSEvent event) throws SFSException {
-		 User sender = (User) event.getParameter(SFSEventParam.USER);
+		 sender = (User) event.getParameter(SFSEventParam.USER);
 	     //String dettaglio = (String)event.getParameter(SFSEventParam.VARIABLES);
 	     
 	     Map<String, UserVariable> varsMap = (Map<String ,UserVariable>) event.getParameter(SFSEventParam.VARIABLES_MAP);

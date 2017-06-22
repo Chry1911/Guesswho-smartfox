@@ -18,7 +18,7 @@ public class ClanExtension extends SFSExtension{
 	    
 	    addRequestHandler("topusers", TopUsersHandler.class);
 	    
-	  
+	    addRequestHandler("returndeck", ReturnDeckHandler.class);
 	    
 	    addRequestHandler("clanmembers", ClanMemberHandler.class);
 	    
