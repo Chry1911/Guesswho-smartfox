@@ -47,23 +47,51 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 		IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 		
 		connection = null;
-		
+		SFSArray ar ;
 			try {
 				trace("sono entrato nel primo try");
 				connection = dbmanager.getConnection();
 				//obj = dbmanager.executeQuery(sql2, new Object[] {1});
-				obj = dbmanager.executeQuery("SELECT * FROM Users WHERE  email=? or username =?", new Object[] {email,name}); 
+				
+				
+				obj = dbmanager.executeQuery("Select * from users where email = ?", 
+						new Object[]{email});
+				
+				ar = (SFSArray)obj;
+				if(ar.size() >= 1){
+					trace("Errore email già presente nel sistema");
+					ISFSObject error = new SFSObject();
+					error.putUtfString("error", "Email già presente nel database");
+					send("register" , error, user);
+				}
+				
+				obj = dbmanager.executeQuery("Select * from users where username = ? ",
+						new Object[]{name});
+				
+				ar = (SFSArray)obj;
+				if(ar.size() >= 1){
+					trace("Errore username già presente nel sistema");
+					ISFSObject error = new SFSObject();
+					error.putUtfString("error", "Username già presente nel database");
+					send("register" , error, user);
+				}
+				
+				
+				
+				
+				obj = dbmanager.executeQuery("SELECT * FROM Users WHERE  email=? and username =?", 
+						new Object[] {email,name}); 
 				
 				trace(obj.toString());
 				
-				SFSArray ar = (SFSArray) obj;
+				ar = (SFSArray) obj;
 				
 				//trace(condition.toString() + "condizione");
 				
 				if(ar.size() >= 1){
-					trace("Errore email giï¿½ presente nel sistema");
+					trace("Errore account già presente nel sistema");
 					ISFSObject error = new SFSObject();
-					error.putUtfString("error", "account giï¿½ esistente nel db");
+					error.putUtfString("error", "account già esistente nel db");
 					send("register" , error, user);
 					//return;
 				}else {
