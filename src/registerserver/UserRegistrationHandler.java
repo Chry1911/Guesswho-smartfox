@@ -64,7 +64,17 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 					error.putUtfString("error", "Email già presente nel database");
 					send("register" , error, user);
 					
-				}
+				}}	catch(SQLException e) {
+					
+					ISFSObject error = new SFSObject();
+					error.putUtfString("error", "MySQL update error");
+					send("register" , error, user);
+				
+
+				
+		}
+			
+			try{
 				
 				obj = dbmanager.executeQuery("Select * from users where username = ? ",
 						new Object[]{name});
@@ -76,12 +86,22 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 					error.putUtfString("error", "Username già presente nel database");
 					send("register" , error, user);
 					
-				}
+				}}
+				
+				catch(SQLException e) {
+					
+					ISFSObject error = new SFSObject();
+					error.putUtfString("error", "MySQL update error");
+					send("register" , error, user);
+				
+
+				
+		}
 				
 				
+				try{
 				
-				
-				obj = dbmanager.executeQuery("SELECT * FROM Users WHERE  email=? and username =?", 
+				obj = dbmanager.executeQuery("SELECT * FROM Users WHERE  email=? or username =?", 
 						new Object[] {email,name}); 
 				
 				trace(obj.toString());
@@ -96,7 +116,10 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 					error.putUtfString("error", "account già esistente nel db");
 					send("register" , error, user);
 					//return;
-				}else if(ar.size() == 0) {
+					return;
+				}
+				
+				if(ar.size() == 0) {
 					trace("registriamo l'utente nel nostro database");
 					
 				
