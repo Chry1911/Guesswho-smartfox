@@ -37,13 +37,15 @@ public class ReturnDeckHandler extends BaseClientRequestHandler {
 			if (arr.size() > 0)
 			{
 				
-				
+				for(int i = 0; i < arr.size(); i++) {
+					String selected = arr.getSFSObject(4).getUtfString("selected_deck");
 				SFSObject result = new SFSObject();
 				result.putSFSArray("success", arr);
-				
+				result.putUtfString("selecteddeck", selected);
 				send("returndeck", result, user);
+				
 				  
-
+				}
 			}else {
 				SFSObject result = new SFSObject();
 				result.putSFSArray("nosuccess", arr);

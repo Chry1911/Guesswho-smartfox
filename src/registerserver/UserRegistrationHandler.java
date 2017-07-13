@@ -200,9 +200,10 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 							  trace(carte + "carte");
 							  trace(selecteddeck + "deck selezionato dall'utente");
 							  
+							  int slotdeck = 1;
 							  
-							  String sql3 = "INSERT into Decks(id_user, deck_name, cards, selected_deck) "
-							  		+ "values (" + id_user + ",'" + deckname + "','" + carte + "', " + selecteddeck + ")";
+							  String sql3 = "INSERT into Decks(id_user, deck_name, cards, selected_deck, id_slot) "
+							  		+ "values (" + id_user + ",'" + deckname + "','" + carte + "', " + selecteddeck + ", " + slotdeck + ")";
 							  
 
 							  trace("query " + sql3);
