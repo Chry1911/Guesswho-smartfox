@@ -194,8 +194,11 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 							  for(int i= 0; i < cards.length; i++){
 								  trace(cards[i]);
 								  carte = carte + cards[i] + ",";
-								 
+								  
+								  
 							  }
+							  
+							  carte = carte.substring(0, carte.length() - 1);
 							  
 							  trace(carte + "carte");
 							  trace(selecteddeck + "deck selezionato dall'utente");
