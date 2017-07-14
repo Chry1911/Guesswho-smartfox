@@ -13,7 +13,7 @@ import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 public class UpdateRoleHandler extends BaseClientRequestHandler{
 	
 	public void handleClientRequest(User user, ISFSObject params){
-		 trace("Sto chiedendo di eliminare uno user dentro un clan al server");
+		 trace("Sto chiedendo al server di aggiornare il ruolo di uno user del clan ");
 			
 			int userplayer = params.getInt("user_id");
 			int clan_id = params.getInt("clan_id");
