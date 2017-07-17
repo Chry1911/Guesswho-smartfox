@@ -35,6 +35,8 @@ public class ClanExtension extends SFSExtension{
 	    addRequestHandler("exitclan", ExitClanHandler.class);
 	    
 	    addRequestHandler("changedeckname", ChangeDeckNameHandler.class);
+	    
+	    addRequestHandler("returncollection", ReturnCollectionHandler.class);
 	}
 
 	public void onDestroy(){

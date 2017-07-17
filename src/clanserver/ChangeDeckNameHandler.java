@@ -25,18 +25,21 @@ public class ChangeDeckNameHandler  extends BaseClientRequestHandler{
 		try {
 			connection = dbmanager.getConnection();
 			String update = "Update decks set deck_name = '" + deckname + "' where id_user = " + userplayer + " and id_slot = " + slot;
+			
+			trace(update);
+			
 			PreparedStatement stmt4 = connection.prepareStatement(update);
 			stmt4.executeUpdate();
 			ISFSObject success = new SFSObject();
 			success.putUtfString("success", "aggiornato il nome del deck dello user");
 			
-			send("updaterole", success, user);
+			send("changedeckname", success, user);
 			
 }catch (SQLException ex) {
 	ISFSObject error = new SFSObject();
 	trace("vediamo cosa contiene l'array" + error.toString());
 	error.putUtfString("error", "MySQL error");
-	send("updaterole" , error, user);
+	send("changedeckname" , error, user);
 	ex.printStackTrace();
 }
 finally {
