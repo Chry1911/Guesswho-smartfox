@@ -191,13 +191,35 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 							  
 							  
 							  String carte = "";
+							  
+							  int livello = 1;
+	    					  int copie = 1;
+	    					  int carta = 0;
+	    					  int tipocarta = 1;
+							  
 							  for(int i= 0; i < cards.length; i++){
 								  trace(cards[i]);
 								  carte = carte + cards[i] + ",";
 								  
-								  
+
+	    						  carta = Integer.parseInt(cards[i]);
+	    						  trace("indice di posizione " + i);
+	    						  if(i == 3) {
+	    							  tipocarta = 2;
+	    						  }
+	    						  
+	    						  String query = "INSERT into Collection"
+		    						  		+ "(id_user, id_carta, tipocarta, n_copie_carta, livello) "
+		  							  		+ "values "
+		  							  		+ "(" + id_user + "," + carta + "," + tipocarta + ", " 
+		  							  		+ copie + ", " + livello + ")";
+		    					  PreparedStatement pstmt = connection.prepareStatement(query);
+		    					  pstmt.executeUpdate(query);
+		    					  
+		    					  trace("stampiamo la query di insert collection" + query);
 							  }
 							  
+							
 							  carte = carte.substring(0, carte.length() - 1);
 							  
 							  trace(carte + "carte");
@@ -216,9 +238,9 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 							  
 							  PreparedStatement stmt4 = connection.prepareStatement(sql3);
 	    						
-	    						stmt4.executeUpdate();
-	    						
-					          
+	    					  stmt4.executeUpdate();
+	    					  
+	    			
 					          //ISFSObject result = new SFSObject();
 					      	success.putUtfString("success" ,"Deck created");
 					      	send("register", success, user);
@@ -230,7 +252,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				ISFSObject error = new SFSObject();
 				error.putUtfString("error", "MySQL update error");
 				send("register" , error, user);
-			
+			    e.printStackTrace();
 
 			
 	} catch (ParseException e) {
@@ -243,6 +265,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				ISFSObject error = new SFSObject();
 				error.putUtfString("error", "MySQL error");
 				send("register" , error, user);
+				e1.printStackTrace();
 			}
 			
 			finally {
@@ -262,15 +285,18 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 		int[] val = new int[limit];
 		
 		for (int i= 0; i < arr.length; i++){
-			val[i] = (int)(10 * Math.random());
-			arr[i] = String.valueOf(val[i]);
 			
+				val[i] = (int)(50 * Math.random() % 10);
+					arr[i] = String.valueOf(val[i]);
+		
 			trace("valore array " + arr[i]);
 			
 		}
 		return arr;
 		
 	}
+	
+	
 	}
 
 	
