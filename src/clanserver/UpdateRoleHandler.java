@@ -17,14 +17,15 @@ public class UpdateRoleHandler extends BaseClientRequestHandler{
 			
 			int userplayer = params.getInt("user_id");
 			int clan_id = params.getInt("clan_id");
-			String role = params.getUtfString("role");
+			//String role = params.getUtfString("role");
+			int role = params.getInt("role");
 			int id_notifica = params.getInt("id_notifica");
 			
 			IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 			Connection connection = null;
 			try {
 				connection = dbmanager.getConnection();
-				String update = "Update clan_users set ruolo = '" + role + "' where id_user = " + userplayer + " and id_clan = " + clan_id;
+				String update = "Update clan_users set ruolo = " + role + " where id_user = " + userplayer + " and id_clan = " + clan_id;
 				trace(update);
 				PreparedStatement stmt4 = connection.prepareStatement(update);
 				stmt4.executeUpdate();

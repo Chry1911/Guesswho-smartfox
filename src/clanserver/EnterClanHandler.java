@@ -83,9 +83,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    					if(contatore <= maxusers){
 			    						trace("prepariamo l'inserimento dello user");
 			    						
-			    						String ruolo = "RECLUTA";
+			    						int ruolo = 1;
 			    						
-			    				          PreparedStatement stmt4 = connection.prepareStatement("INSERT INTO clan_users"+"(id_clan,id_user,ruolo) VALUES("+ clan_id + ", " + userplayer + ", '" + ruolo + "' );");
+			    				          PreparedStatement stmt4 = connection.prepareStatement("INSERT INTO clan_users"+"(id_clan,id_user,ruolo) VALUES("+ clan_id + ", " + userplayer + ", " + ruolo + " );");
 			    						
 			    				         
 			    							

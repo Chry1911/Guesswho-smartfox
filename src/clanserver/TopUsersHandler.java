@@ -24,9 +24,10 @@ public class TopUsersHandler extends BaseClientRequestHandler{
 			
 			ISFSArray arr = dbmanager.executeQuery("SELECT guesswho.users.id_user, "
 					+ "guesswho.users.username, guesswho.users.trofei, guesswho.users.position, "
-					+ "guesswho.clan.clan_name, guesswho.clan.stemma FROM guesswho.Users "
+					+ "guesswho.clan.clan_name, guesswho.clan.stemma, guesswho.role.* FROM guesswho.Users "
 					+ "LEFT JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
                     + "LEFT JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
+					+ "LEFT JOIN ROLE ON ROLE.ID_ROLE = CLAN_USERS.RUOLO "
 					+ "where guesswho.users.position Like ? "
 					+ "order by trofei desc limit 100", new Object[] {"%"+ nation + "%"});
 			
