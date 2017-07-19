@@ -18,6 +18,7 @@ public class UpdateRoleHandler extends BaseClientRequestHandler{
 			int userplayer = params.getInt("user_id");
 			int clan_id = params.getInt("clan_id");
 			String role = params.getUtfString("role");
+			int id_notifica = params.getInt("id_notifica");
 			
 			IDBManager dbmanager = getParentExtension().getParentZone().getDBManager();
 			Connection connection = null;
@@ -27,7 +28,7 @@ public class UpdateRoleHandler extends BaseClientRequestHandler{
 				PreparedStatement stmt4 = connection.prepareStatement(update);
 				stmt4.executeUpdate();
 				
-				String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex) Values (1, " + clan_id + ", 'Hai aggiornato il ruolo dell'utente : " + userplayer + "', Now())";
+				String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex, type_not) Values (1, " + clan_id + ", 'Hai aggiornato il ruolo dell'utente : " + userplayer + "', Now()," + id_notifica + " )";
 				stmt4 = connection.prepareStatement(ssql3);
 				stmt4.executeUpdate();
 				
