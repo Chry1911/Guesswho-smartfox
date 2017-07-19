@@ -28,7 +28,8 @@ public class UpdateRoleHandler extends BaseClientRequestHandler{
 				PreparedStatement stmt4 = connection.prepareStatement(update);
 				stmt4.executeUpdate();
 				
-				String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex, type_not) Values (1, " + clan_id + ", 'Hai aggiornato il ruolo dell'utente : " + userplayer + "', Now()," + id_notifica + " )";
+				String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex, type_not) Values"
+						+ " (" + userplayer + ", " + clan_id + ", 'Hai aggiornato il ruolo dell'utente : " + userplayer + "', Now()," + id_notifica + " )";
 				stmt4 = connection.prepareStatement(ssql3);
 				stmt4.executeUpdate();
 				
