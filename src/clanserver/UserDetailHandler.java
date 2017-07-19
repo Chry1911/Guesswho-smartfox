@@ -25,8 +25,10 @@ public class UserDetailHandler extends BaseClientRequestHandler{
 		try{
 			trace("Ho fatto l'accesso per richiedere al server la mia query");
 			connection = dbmanager.getConnection();
-			ISFSArray arr = dbmanager.executeQuery("select * from guesswho.users "
-					+ "where id_user = ? "
+			ISFSArray arr = dbmanager.executeQuery("select guesswho.users.*, guesswho.clan.* from guesswho.users "
+					+ "LEFT JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "  
+					+ "LEFT JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN  "
+					+ "where guesswho.users.id_user = ? "
 					, new Object[] {id_user});
 			if (arr.size() > 0)
 			{
