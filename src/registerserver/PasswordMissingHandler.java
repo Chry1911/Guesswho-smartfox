@@ -37,7 +37,7 @@ public class PasswordMissingHandler extends BaseClientRequestHandler {
 			connection = dbmanager.getConnection();
 			trace("sono entrato nel primo try");
 			//obj = dbmanager.executeQuery(sql2, new Object[] {1});
-			ISFSArray ar = dbmanager.executeQuery("SELECT id_user FROM Users WHERE  email=? ", new Object[] {email}); 
+			ISFSArray ar = dbmanager.executeQuery("SELECT id_user FROM users WHERE  email=? ", new Object[] {email}); 
 			
 			ISFSObject ob = ar.getSFSObject(0);
 			

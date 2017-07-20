@@ -31,7 +31,7 @@ public class UpdatePasswordHandler  extends BaseClientRequestHandler {
 			trace("sono entrato nel primo try");
 			connection = dbmanager.getConnection();
 			//obj = dbmanager.executeQuery(sql2, new Object[] {1});
-			ISFSArray ar = dbmanager.executeQuery("SELECT id_user FROM Users WHERE  email=? ", new Object[] {email}); 
+			ISFSArray ar = dbmanager.executeQuery("SELECT id_user FROM users WHERE  email=? ", new Object[] {email}); 
 			
 			ISFSObject ob = ar.getSFSObject(0);
 			
@@ -64,7 +64,7 @@ public class UpdatePasswordHandler  extends BaseClientRequestHandler {
 		
 	         dbmanager.executeUpdate(sql);
 	          ISFSObject success = new SFSObject();
-	      	success.putUtfString("success" ,"Codice captcha cambiato si può cambiare la password");
+	      	success.putUtfString("success" ,"Codice captcha cambiato si puï¿½ cambiare la password");
 	      	send("updatepassword", success, user);
 		} 
 		

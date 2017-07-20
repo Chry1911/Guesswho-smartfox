@@ -38,9 +38,10 @@ public class FindClanHandler extends BaseClientRequestHandler {
 			ISFSArray arr = dbmanager.executeQuery("SELECT clan.id_clan, clan.stemma, clan.clan_name, clan.maxusers, clan.trofei_total, "
 					+ "Left(guesswho.clan.descrizione, 21) as preview, "
 					+ "count(guesswho.clan_users.id_user) as numutenti "
-					+ "FROM guesswho.Clan "
-					+ "LEFT JOIN CLAN_USERS ON CLAN_USERS.ID_CLAN = CLAN.ID_CLAN "
-                    + "LEFT JOIN USERS ON Users.ID_user = CLAN_USERS.ID_user "
+					+ "FROM guesswho.clan "
+					+ "LEFT JOIN clan_users ON clan_users.id_clan = clan.id_clan "
+                    + "LEFT JOIN users ON users.id_user = clan_users.id_user "
+	        
 					+ "where clan_name "
 					+ "Like ? and guesswho.clan.position Like ? and maxUsers <= ? and minUsers >= ? and min_trofei >= ? "
 					+ "and min_trofei <= " + usertrophy + "  and (tipo = 'Public' or tipo = 'Invito') "

@@ -38,11 +38,12 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 		Connection connection = null;
 		try {
 			connection = dbmanager.getConnection();
-			trace("sono entrato nel primo try per verificare che lo user non abbia già clan");
+			trace("sono entrato nel primo try per verificare che lo user non abbia giï¿½ clan");
 			
-			PreparedStatement stmt = connection.prepareStatement("Select clan_name From Users "
-									+ "LEFT JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
-                                    + "LEFT JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
+			PreparedStatement stmt = connection.prepareStatement("Select clan_name From users "
+					+ "LEFT JOIN clan_users ON clan_users.id_user = users.id_user "
+                    + "LEFT JOIN clan ON clan.id_clan = clan_users.id_clan "
+	        		
 							        + "where users.id_user = " + userplayer );
 
 			  ResultSet res = stmt.executeQuery();
@@ -56,9 +57,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    	trace(clan_name);
 			    	
 			    	if(clan_name == "" || clan_name == null){
-			    		trace("se l'utente non ha clan ora vediamo se il clan selezionato è Public");
+			    		trace("se l'utente non ha clan ora vediamo se il clan selezionato ï¿½ Public");
 			    		
-			    		PreparedStatement stmt2 = connection.prepareStatement("Select tipo from Clan where id_clan = " + clan_id );
+			    		PreparedStatement stmt2 = connection.prepareStatement("Select tipo from clan where id_clan = " + clan_id );
 			    		
 			    		ResultSet r = stmt2.executeQuery();
 			    		while(r.next()){
@@ -66,10 +67,11 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    			trace(" stampiamo il tipo" + tipo);
 			    			
 			    			if(tipo.equals("Public")){
-			    				trace("Verifichiamo che quel clan non abbia già max users");
+			    				trace("Verifichiamo che quel clan non abbia giï¿½ max users");
 			    				PreparedStatement stmt3 = connection.prepareStatement("SELECT count(clan_users.id_user) as utenti_clan, maxUsers from clan_users "
-											+ "Inner JOIN CLAN ON CLAN.ID_CLAN = CLAN_users.ID_CLAN "
-                                            + "inner JOIN USERS ON Users.ID_user = CLAN_USERS.ID_user "	
+			    						+ "INNER JOIN clan ON clan.id_clan = clan_user.id_clan "
+			    	                    + "INNER JOIN users ON users.id_user = clan_users.id_user "
+			    		        		
 										    + "where clan_users.id_clan = " + clan_id );
 			    				
 			    				ResultSet rs = stmt3.executeQuery();
@@ -83,9 +85,9 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    					if(contatore <= maxusers){
 			    						trace("prepariamo l'inserimento dello user");
 			    						
-			    						String ruolo = "RECLUTA";
+			    						int ruolo = 1;
 			    						
-			    				          PreparedStatement stmt4 = connection.prepareStatement("INSERT INTO clan_users"+"(id_clan,id_user,ruolo) VALUES("+ clan_id + ", " + userplayer + ", '" + ruolo + "' );");
+			    				          PreparedStatement stmt4 = connection.prepareStatement("INSERT INTO clan_users"+"(id_clan,id_user,ruolo) VALUES("+ clan_id + ", " + userplayer + ", " + ruolo + " );");
 			    						
 			    				         
 			    							

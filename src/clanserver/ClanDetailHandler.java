@@ -28,10 +28,11 @@ public class ClanDetailHandler extends BaseClientRequestHandler{
 			connection = dbmanager.getConnection();
 			
 			ISFSArray arr = dbmanager.executeQuery("select users.id_user,users.username, users.trofei, "
-					+ "users.position, guesswho.clan.*, guesswho.clan_users.ruolo from users "
-					+ "INNER JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
-                    + "INNER JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
-					+ "where GUESSWHO.CLAN.id_clan = ? order by users.trofei desc "
+					+ "users.position, guesswho.clan.*, guesswho.clan_users.ruolo, guesswho.role.description from users "
+					+ "INNER JOIN clan_users ON clan_users.id_user = users.id_user "
+                    + "INNER JOIN clan ON clan.id_clan = clan_users.id_clan "
+	        		+ "INNER JOIN role ON role.id_role = clan_users.ruolo "
+					+ "where guesswho.clan.id_clan = ? order by users.trofei desc "
 					,new Object[] {id_clan});
 			if (arr.size() > 0)
 			{
@@ -46,6 +47,7 @@ public class ClanDetailHandler extends BaseClientRequestHandler{
 			ISFSObject error = new SFSObject();
 			error.putUtfString("error", "MySQL error");
 			send("clandetail" , error, user);
+			ex.printStackTrace();
 	}
 		finally{
 			try{

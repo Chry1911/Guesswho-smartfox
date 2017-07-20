@@ -53,7 +53,7 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 			trace("sono entrato nel primo try");
 			connection = dbmanager.getConnection();
 			
-			obj = dbmanager.executeQuery("SELECT * FROM Clan WHERE  clan_name=?", new Object[] {clan_name}); 
+			obj = dbmanager.executeQuery("SELECT * FROM clan WHERE  clan_name=?", new Object[] {clan_name}); 
 			
 			trace(obj.toString());
 			
@@ -62,15 +62,15 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 			
 			
 			if(ar.size() >= 1){
-				trace("Errore clan già presente nel sistema");
+				trace("Errore clan giï¿½ presente nel sistema");
 				ISFSObject error = new SFSObject();
-				error.putUtfString("error", "clan già registrato nel database");
+				error.putUtfString("error", "clan giï¿½ registrato nel database");
 				send("clan" , error, user);
 				
 			}else {
 				trace("registriamo il clan nel nostro database");
 		
-		String sql = "INSERT into Clan(clan_name, stemma, descrizione, min_trofei, position, tipo, maxUsers, minUsers) values (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT into clan(clan_name, stemma, descrizione, min_trofei, position, tipo, maxUsers, minUsers) values (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try{
 			

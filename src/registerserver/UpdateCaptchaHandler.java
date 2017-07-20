@@ -30,7 +30,7 @@ public class UpdateCaptchaHandler  extends BaseClientRequestHandler {
 			connection = dbmanager.getConnection();
 			trace("sono entrato nel primo try");
 			//obj = dbmanager.executeQuery(sql2, new Object[] {1});
-			ISFSArray ar = dbmanager.executeQuery("SELECT captcha FROM Users WHERE  email=? ", new Object[] {email}); 
+			ISFSArray ar = dbmanager.executeQuery("SELECT captcha FROM users WHERE  email=? ", new Object[] {email}); 
 			
 			ISFSObject ob = ar.getSFSObject(0);
 			

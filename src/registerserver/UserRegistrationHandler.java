@@ -59,9 +59,9 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				
 				ar = (SFSArray)obj;
 				if(ar.size() >= 1){
-					trace("Errore email già presente nel sistema");
+					trace("Errore email giï¿½ presente nel sistema");
 					ISFSObject error = new SFSObject();
-					error.putUtfString("error", "Email già presente nel database");
+					error.putUtfString("error", "Email giï¿½ presente nel database");
 					send("register" , error, user);
 					
 				}}	catch(SQLException e) {
@@ -81,9 +81,9 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				
 				ar = (SFSArray)obj;
 				if(ar.size() >= 1){
-					trace("Errore username già presente nel sistema");
+					trace("Errore username giï¿½ presente nel sistema");
 					ISFSObject error = new SFSObject();
-					error.putUtfString("error", "Username già presente nel database");
+					error.putUtfString("error", "Username giï¿½ presente nel database");
 					send("register" , error, user);
 					
 				}}
@@ -101,7 +101,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				
 				try{
 				
-				obj = dbmanager.executeQuery("SELECT * FROM Users WHERE  email=? or username =?", 
+				obj = dbmanager.executeQuery("SELECT * FROM users WHERE  email=? or username =?", 
 						new Object[] {email,name}); 
 				
 				trace(obj.toString());
@@ -111,9 +111,9 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				//trace(condition.toString() + "condizione");
 				
 				if(ar.size() >= 1){
-					trace("Errore account già presente nel sistema");
+					trace("Errore account giï¿½ presente nel sistema");
 					ISFSObject error = new SFSObject();
-					error.putUtfString("error", "account già esistente nel db");
+					error.putUtfString("error", "account giï¿½ esistente nel db");
 					send("register" , error, user);
 					//return;
 					return;
@@ -158,7 +158,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 					    
 					    trace("stampiamo la data " + formattedDate);
 
-						String sql = "INSERT into Users(first_name, last_name, date_of_birth, username, password, email, trofei,gems,gold, position, captcha) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+						String sql = "INSERT into users(first_name, last_name, date_of_birth, username, password, email, trofei,gems,gold, position, captcha) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				          obj = dbmanager.executeInsert(sql,
 				                     new Object[] {first_name,last_name, formattedDate, name, password, email, trofei, gemme, gold, nation, code});
 				          

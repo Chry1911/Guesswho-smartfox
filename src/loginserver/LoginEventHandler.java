@@ -59,10 +59,13 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			connection = dbManager.getConnection();
 
 			// Build a prepared statement
-	        PreparedStatement stmt = connection.prepareStatement("SELECT users.id_user,username, password, trofei, gold, gems ,guesswho.users.position, clan.id_clan ,clan_name, guesswho.clan.position as postoclan, trofei_total, stemma, ruolo "
-	        		+ "FROM Users "
-	        		+ "LEFT JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
-                    + "LEFT JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
+	        PreparedStatement stmt = connection.prepareStatement("SELECT users.id_user,username, password, trofei, gold, gems ,"
+	        		+ "guesswho.users.position, clan.id_clan ,clan_name, guesswho.clan.position as postoclan, trofei_total, stemma, "
+	        		+ "guesswho.role.description "
+	        		+ "FROM users "
+	        		+ "LEFT JOIN clan_users ON clan_users.id_user = users.id_user "
+                    + "LEFT JOIN clan ON clan.id_clan = clan_users.id_clan "
+	        		+ "LEFT JOIN role ON role.id_role = clan_users.ruolo "
 	        		+ "where username='"+userName+"' or email ='"+userName+"'");
 	        
 	    
@@ -150,7 +153,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				
 		        if(getParentExtension().getParentZone().getRoomByName(clan_name) != null){
 					
-						trace("room già esistente");
+						trace("room giï¿½ esistente");
 						
 						
 					} else {

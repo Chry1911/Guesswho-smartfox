@@ -28,8 +28,9 @@ public class ClanMemberHandler extends BaseClientRequestHandler {
 			ISFSArray arr = 
 					dbmanager.executeQuery("Select guesswho.users.username, guesswho.clan.clan_name,  "
 							+ "guesswho.users.trofei, guesswho.users.position from guesswho.users "	
-							+ "INNER JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
-                            + "INNER JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
+							+ "INNER JOIN clan_users ON clan_users.id_user = users.id_user "
+		                    + "INNER JOIN clan ON clan.id_clan = clan_users.id_clan "
+			        		
 							+ "where clan_name = ? ", 
 							new Object[] {clan_name});
 			
