@@ -59,15 +59,15 @@ public class LoginEventHandler extends BaseServerEventHandler {
 			connection = dbManager.getConnection();
 
 			// Build a prepared statement
-	        PreparedStatement stmt = connection.prepareStatement("SELECT users.id_user,username, password, trofei, gold, gems ,"
-	        		+ "guesswho.users.position, clan.id_clan ,clan_name, guesswho.clan.position as postoclan, trofei_total, stemma, "
-	        		+ "guesswho.role.description "
+			 PreparedStatement stmt = connection.prepareStatement("SELECT users.id_user,username, "
+	        		+ "password, trofei, gold, gems ,guesswho.users.position, "
+	        		+ "clan.id_clan ,clan_name, guesswho.clan.position as postoclan, "
+	        		+ "trofei_total, stemma, guesswho.role.id_role, guesswho.role.description "
 	        		+ "FROM users "
-	        		+ "LEFT JOIN clan_users ON clan_users.id_user = users.id_user "
-                    + "LEFT JOIN clan ON clan.id_clan = clan_users.id_clan "
+	        		+ "LEFT JOIN clan_users ON clan_user.id_user = users.id_user "
+                    + "LEFT JOIN clan ON clan.id_clan =  clan_users.id_clan "
 	        		+ "LEFT JOIN role ON role.id_role = clan_users.ruolo "
 	        		+ "where username='"+userName+"' or email ='"+userName+"'");
-	        
 	    
                
 

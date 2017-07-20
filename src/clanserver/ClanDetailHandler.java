@@ -33,6 +33,11 @@ public class ClanDetailHandler extends BaseClientRequestHandler{
                     + "INNER JOIN clan ON clan.id_clan = clan_users.id_clan "
 	        		+ "INNER JOIN role ON role.id_role = clan_users.ruolo "
 					+ "where guesswho.clan.id_clan = ? order by users.trofei desc "
+					+ "users.position, guesswho.clan.*, guesswho.clan_users.ruolo, role.description from users "
+					+ "INNER JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
+                    + "INNER JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
+                    + "INNER JOIN ROLE ON ROLE.ID_ROLE = CLAN_USERS.RUOLO "
+					+ "where GUESSWHO.CLAN.id_clan = ? order by users.trofei desc "
 					,new Object[] {id_clan});
 			if (arr.size() > 0)
 			{

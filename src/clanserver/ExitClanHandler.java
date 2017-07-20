@@ -50,6 +50,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 						+	"from guesswho.clan_users " 
 						+ "left join guesswho.clan on guesswho.clan.id_clan = guesswho.clan_users.id_clan "
 						+ "left join guesswho.users on guesswho.users.id_user = guesswho.clan_users.id_user "
+						+ "LEFT JOIN ROLE ON ROLE.ID_ROLE = CLAN_USERS.RUOLO "
 						+ "where guesswho.clan_users.id_clan = " + clan_id + " and guesswho.clan_users.id_user = " + userplayer;
 				
 				trace(ssql2);
@@ -91,7 +92,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 							+ "where guesswho.clan_users.id_clan = " + clan_id + " and guesswho.users.id_user <> " 
 							+ userplayer + " and guesswho.clan_users.ruolo = 3 group by guesswho.Users.id_user "
 									+ "order by numerotrofei desc limit 1 ";
-					
+							
 					trace("stampiamo la query" + query);
 					PreparedStatement stmt = connection.prepareStatement(query);
 					ResultSet r = stmt.executeQuery();
@@ -156,7 +157,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 							
 					
 							String update = "Update clan_users set ruolo = 4 where id_user = " + id_utente + " "
-									+ "and id_user <> " + userplayer + " and id_clan = " + clan_id;
+									+ "and id_user <> " + userplayer + " and id_clan = " + clan_id;	
 							trace("stampiamo la query di update" + update);
 							
 							stmt4 = connection.prepareStatement(update);
@@ -196,7 +197,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 											+ "and guesswho.users.id_user <> " + userplayer + " "
 													+ "and guesswho.clan_users.ruolo = 1 "
 													+ "group by guesswho.Users.id_user order by numerotrofei desc limit 1 ";
-						
+				
 							trace("stampiamo la query" + query);
 							PreparedStatement stmt = connection.prepareStatement(query);
 							ResultSet r = stmt.executeQuery();
@@ -244,15 +245,15 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 					
 					}
 				
-				
-				else if(utente == userplayer && membri > 1 && ruolo < 4){
+			
+				else if(utente == userplayer && membri > 1 && ruolo <= 4){
+
 					
 					String sql = "delete from clan_users where id_clan = " + clan_id + " and id_user = " + userplayer;
 					trace("Stampiamo la query che elimina l'utente da quel clan " + sql);
 					stmt5 = connection.createStatement();
 					stmt5.executeUpdate(sql);
 					trace("utente eliminato dal clan");
-					
 					String ssql3 = "Insert into chat_general(id_user, id_clan, message, datamex, type_not) "
 							+ "Values (1, " + clan_id + ", 'E uscito del clan lo user " + userplayer + "', Now(), 2)";
 					
@@ -272,7 +273,9 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 							
 					}
 				
-				else if(utente == userplayer && membri == 1 && ruolo == 4){
+
+				else if(utente == userplayer && membri == 1 && ruolo==4){
+
 						String sql = "delete from clan_users where id_clan = " + clan_id + " and id_user = " + userplayer;
 						trace("Stampiamo la query che elimina l'utente da quel clan " + sql);
 						stmt5 = connection.createStatement();
@@ -334,7 +337,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 			
 			e.printStackTrace();
 		}
-		String sql = "select count(ruolo) as numero from clan_users where ruolo = 'CO-CAPO' and id_clan = " + clan_id;
+		String sql = "select count(ruolo) as numero from clan_users where ruolo = 3 and id_clan = " + clan_id;
 		trace("Stampiamo la query che elimina l'utente da quel clan " + sql);
 		PreparedStatement stmt4 = connection.prepareStatement(sql);
 		
@@ -358,7 +361,7 @@ public class ExitClanHandler extends BaseClientRequestHandler {
 			
 			e.printStackTrace();
 		}
-		String sql = "select count(ruolo) as numero from clan_users where ruolo = 'ANZIANO' and id_clan = " + clan_id;
+		String sql = "select count(ruolo) as numero from clan_users where ruolo = 2 and id_clan = " + clan_id;
 		trace("Stampiamo la query che elimina l'utente da quel clan " + sql);
 		PreparedStatement stmt4 = connection.prepareStatement(sql);
 		
