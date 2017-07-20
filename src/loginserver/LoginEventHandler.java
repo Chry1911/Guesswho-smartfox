@@ -120,7 +120,7 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				int trofei_clan = res.getInt("trofei_total");
 				trace(trofei_clan);
 				
-				String ruolo = res.getString("ruolo");
+				String ruolo = res.getString("description");
 				if (ruolo == null){
 					ruolo = "";
 				}
