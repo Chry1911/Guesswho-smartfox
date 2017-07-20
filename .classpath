@@ -7,14 +7,14 @@
 	<classpathentry kind="lib" path="src/sfs2x-lib.jar"/>
 	<classpathentry kind="lib" path="src/sfs2x-util.jar"/>
 	<classpathentry kind="lib" path="src/sfs2x.jar"/>
-	<classpathentry kind="lib" path="/home/christian/Documenti/Christian/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="/home/christian/Documenti/Christian/jdom.jar"/>
-	<classpathentry kind="lib" path="/home/christian/Documenti/Christian/joda-time-2.2.jar"/>
-	<classpathentry kind="lib" path="/home/christian/Documenti/Christian/mail.jar"/>
-	<classpathentry kind="lib" path="/home/christian/Documenti/Christian/netty-3.2.2.Final.jar"/>
-	<classpathentry kind="lib" path="/home/christian/Documenti/Christian/sfs2x-client-core.jar"/>
-	<classpathentry kind="lib" path="/home/christian/Documenti/Christian/SFS2X_API_Java.jar"/>
-	<classpathentry kind="lib" path="/home/christian/Documenti/Christian/slf4j-api-1.6.1.jar"/>
-	<classpathentry kind="lib" path="/home/christian/Documenti/Christian/slf4j-simple-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Christian/workspace/provaserver/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Christian/workspace/provaserver/jdom.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Christian/workspace/provaserver/joda-time-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Christian/workspace/provaserver/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Christian/workspace/provaserver/netty-3.2.2.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Christian/workspace/provaserver/SFS2X_API_Java.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Christian/workspace/provaserver/sfs2x-client-core.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Christian/workspace/provaserver/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Christian/workspace/provaserver/slf4j-simple-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

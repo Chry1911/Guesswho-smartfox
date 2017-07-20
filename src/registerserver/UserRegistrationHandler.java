@@ -208,7 +208,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 	    							  tipocarta = 2;
 	    						  }
 	    						  
-	    						  String query = "INSERT into Collection"
+	    						  String query = "INSERT into collection"
 		    						  		+ "(id_user, id_carta, tipocarta, n_copie_carta, livello) "
 		  							  		+ "values "
 		  							  		+ "(" + id_user + "," + carta + "," + tipocarta + ", " 
@@ -227,7 +227,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 							  
 							  int slotdeck = 1;
 							  
-							  String sql3 = "INSERT into Decks(id_user, deck_name, cards, selected_deck, id_slot) "
+							  String sql3 = "INSERT into decks(id_user, deck_name, cards, selected_deck, id_slot) "
 							  		+ "values (" + id_user + ",'" + deckname + "','" + carte + "', " + selecteddeck + ", " + slotdeck + ")";
 							  
 

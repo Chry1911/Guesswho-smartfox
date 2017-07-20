@@ -24,16 +24,10 @@ public class TopUsersHandler extends BaseClientRequestHandler{
 			
 			ISFSArray arr = dbmanager.executeQuery("SELECT guesswho.users.id_user, "
 					+ "guesswho.users.username, guesswho.users.trofei, guesswho.users.position, "
-
 					+ "guesswho.clan.clan_name, guesswho.clan.stemma FROM guesswho.users "
 					+ "LEFT JOIN clan_users ON clan_users.id_user = users.id_user "
                     + "LEFT JOIN clan ON clan.id_clan = clan_users.id_clan "
-
-					+ "guesswho.clan.clan_name, guesswho.clan.stemma, guesswho.role.* FROM guesswho.Users "
-					+ "LEFT JOIN CLAN_USERS ON CLAN_USERS.ID_USER = USERS.ID_USER "
-                    + "LEFT JOIN CLAN ON CLAN.ID_CLAN = CLAN_USERS.ID_CLAN "
-					+ "LEFT JOIN ROLE ON ROLE.ID_ROLE = CLAN_USERS.RUOLO "
-
+					+ "LEFT JOIN role ON role.id_role = clan_users.ruolo "
 					+ "where guesswho.users.position Like ? "
 					+ "order by trofei desc limit 100", new Object[] {"%"+ nation + "%"});
 			
@@ -53,6 +47,7 @@ public class TopUsersHandler extends BaseClientRequestHandler{
 			ISFSObject error = new SFSObject();
 			error.putUtfString("error", "MySQL error");
 			send("topusers" , error, user);
+			ex.printStackTrace();
 	}
 		}
 

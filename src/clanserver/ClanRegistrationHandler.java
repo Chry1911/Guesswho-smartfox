@@ -91,9 +91,9 @@ public class ClanRegistrationHandler extends BaseClientRequestHandler {
 					int idclan = rs.getInt("id_clan");
 					trace(idclan);
 	          
-					String ruolo = "CAPO";
+					int ruolo = 4 ;
 					
-	          PreparedStatement stmt4 = connection.prepareStatement("INSERT INTO clan_users"+"(id_clan,id_user,ruolo) VALUES("+ idclan + ", " + user_founder + ", '" + ruolo + "' );");
+	          PreparedStatement stmt4 = connection.prepareStatement("INSERT INTO clan_users"+"(id_clan,id_user,ruolo) VALUES("+ idclan + ", " + user_founder + ", " + ruolo + " );");
 				stmt4.executeUpdate();
 				}
 	          ISFSArray arr = dbmanager.executeQuery(sql2
