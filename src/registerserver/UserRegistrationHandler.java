@@ -171,7 +171,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 				      	
 				      	trace("il server ora crea il deck per lo user");
 				      	
-				      	String sql2 = "Select id_user from Users where email = '" + email + "'";
+				      	String sql2 = "Select id_user from users where email = '" + email + "'";
 				      	
 				      	PreparedStatement stmt = connection.prepareStatement(sql2);
 
@@ -197,17 +197,20 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 	    					  int carta = 0;
 	    					  int tipocarta = 1;
 							  
-							  for(int i= 0; i < cards.length; i++){
+	    					  for(int i= 0; i < cards.length; i++){
 								  trace(cards[i]);
+								  trace("indice di posizione " + i);
 								  carte = carte + cards[i] + ",";
 								  
 
 	    						  carta = Integer.parseInt(cards[i]);
-	    						  trace("indice di posizione " + i);
+	    						 
 	    						  if(i == 3) {
 	    							  tipocarta = 2;
 	    						  }
-	    						  
+	    						
+		    						  
+		    						 
 	    						  String query = "INSERT into collection"
 		    						  		+ "(id_user, id_carta, tipocarta, n_copie_carta, livello) "
 		  							  		+ "values "
@@ -286,7 +289,7 @@ public class UserRegistrationHandler extends BaseClientRequestHandler {
 		
 		for (int i= 0; i < arr.length; i++){
 			
-				val[i] = (int)(50 * Math.random() % 10);
+				val[i] = (int)(10 * Math.random() + 1);
 					arr[i] = String.valueOf(val[i]);
 		
 			trace("valore array " + arr[i]);

@@ -25,7 +25,7 @@ public class UpdateRoleHandler extends BaseClientRequestHandler{
 			Connection connection = null;
 			try {
 				connection = dbmanager.getConnection();
-				String update = "Update clan_users set ruolo = '" + role + "' where id_user = " + userplayer + " and id_clan = " + clan_id;
+				String update = "Update clan_users set ruolo = " + role + " where id_user = " + userplayer + " and id_clan = " + clan_id;
 				trace(update);
 				PreparedStatement stmt4 = connection.prepareStatement(update);
 				stmt4.executeUpdate();
