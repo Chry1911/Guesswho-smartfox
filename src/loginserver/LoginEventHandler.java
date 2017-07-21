@@ -126,6 +126,9 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				}
 				trace(ruolo);
 				
+				int id_role = res.getInt("id_role");
+				trace(id_role);
+				
 				outData.putInt("id_user", id_user);
 				outData.putUtfString("nome_utente", username);
 				outData.putInt("trofei", trofei);
@@ -135,7 +138,8 @@ public class LoginEventHandler extends BaseServerEventHandler {
 				outData.putInt("clan_id", clan_id);
 				outData.putUtfString("clan_name", clan_name);
 				outData.putUtfString("clan_position", clan_position);
-				outData.putUtfString("ruolo", ruolo);
+				outData.putInt("id_ruolo", id_role);
+				outData.putUtfString("descrizione_ruolo", ruolo);
 				outData.putInt("trofei_clan", trofei_clan);
 				outData.putInt("stemma", stemma);
 				outData.putUtfString(SFSConstants.NEW_LOGIN_NAME, username);
