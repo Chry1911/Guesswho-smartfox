@@ -69,7 +69,7 @@ public class EnterClanHandler extends BaseClientRequestHandler {
 			    			if(tipo.equals("Public")){
 			    				trace("Verifichiamo che quel clan non abbia gi� max users");
 			    				PreparedStatement stmt3 = connection.prepareStatement("SELECT count(clan_users.id_user) as utenti_clan, maxUsers from clan_users "
-			    						+ "INNER JOIN clan ON clan.id_clan = clan_user.id_clan "
+			    						+ "INNER JOIN clan ON clan.id_clan = clan_users.id_clan "
 			    	                    + "INNER JOIN users ON users.id_user = clan_users.id_user "
 			    		        		
 										    + "where clan_users.id_clan = " + clan_id );
