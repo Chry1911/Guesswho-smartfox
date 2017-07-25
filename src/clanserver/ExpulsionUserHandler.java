@@ -47,6 +47,7 @@ public class ExpulsionUserHandler extends BaseClientRequestHandler{
 			send("expulsionmember", success, user);
 			
 			
+			
 		}	catch (SQLException e)
 	        {
 			        	ISFSObject error = new SFSObject();
